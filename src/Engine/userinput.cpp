@@ -8,6 +8,7 @@
 #include "userinput.h"
 #include "world.h"
 #include "glrendering.h"
+#include "gtkuserinterface.h"
 
 #include <SDL2/SDL.h>
 
@@ -21,12 +22,17 @@ float cameraSensitivity = 1000;
 
 float movementSpeed = 0.1;
 
+bool rungtk=false;
+
 SDL_Thread* inputLoopThread;
 
 void inputLoop() {
 
 	while (runLoopThreads) {
 		getUserEvents();
+		if (rungtk) {
+			stepGTKInterface();
+		}
 		SDL_Delay(1000./60.);
 	}
 }

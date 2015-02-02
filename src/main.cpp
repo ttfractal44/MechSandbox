@@ -14,10 +14,15 @@
 #include "misc/utils.h"
 #include "Engine/glrendering.h"
 #include "Engine/userinput.h"
+#include "Engine/gtkuserinterface.h"
 
 Engine::World* world = new Engine::World;
 
-int main() {
+int main(int argc, char* argv[]) {
+
+	Engine::initGTKInterface(argc, argv);
+
+	Engine::rungtk = true;
 
 	Engine::setGraphicsRenderWorld(world);
 
@@ -216,6 +221,8 @@ int main() {
 
 		//Engine::waitNextRefresh();
 		SDL_Delay(1000./60.);
+
+		//Engine::stepGTKInterface();
 
 	}
 

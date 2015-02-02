@@ -15,7 +15,7 @@
 
 namespace Engine {
 
-	/*struct graphicsGeomVertex {
+	struct graphicsGeomVertex {
 		GLfloat x;
 		GLfloat y;
 		GLfloat z;
@@ -33,7 +33,7 @@ namespace Engine {
 		GLfloat texture_v;
 	};
 
-	struct IndexedGraphicsGeomMesh {
+	/*struct IndexedGraphicsGeomMesh {
 		std::vector<GLfloat> vertices;
 		std::vector<GLfloat> normals;
 		std::vector<GLfloat> diffusecolor;
