@@ -266,8 +266,6 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
  /usr/include/gtk-3.0/gdk/gdkcursor.h \
  /usr/include/gtk-3.0/gdk/gdkdisplaymanager.h \
  /usr/include/gtk-3.0/gdk/gdkenumtypes.h \
- /usr/include/gtk-3.0/gdk/gdkframeclock.h \
- /usr/include/gtk-3.0/gdk/gdkframetimings.h \
  /usr/include/gtk-3.0/gdk/gdkkeys.h /usr/include/gtk-3.0/gdk/gdkkeysyms.h \
  /usr/include/gtk-3.0/gdk/gdkmain.h /usr/include/gtk-3.0/gdk/gdkpango.h \
  /usr/include/gtk-3.0/gdk/gdkproperty.h \
@@ -321,7 +319,11 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
  /usr/include/gtk-3.0/gtk/gtkmenushell.h \
  /usr/include/gtk-3.0/gtk/gtkaccelmap.h \
  /usr/include/gtk-3.0/gtk/gtkaccessible.h \
+ /usr/include/gtk-3.0/gtk/gtkaction.h \
  /usr/include/gtk-3.0/gtk/gtkactionable.h \
+ /usr/include/gtk-3.0/gtk/gtkactiongroup.h \
+ /usr/include/gtk-3.0/gtk/gtkstock.h \
+ /usr/include/gtk-3.0/gtk/gtkactivatable.h \
  /usr/include/gtk-3.0/gtk/gtkadjustment.h \
  /usr/include/gtk-3.0/gtk/gtkalignment.h \
  /usr/include/gtk-3.0/gtk/gtkappchooser.h \
@@ -400,27 +402,26 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
  /usr/include/gtk-3.0/gtk/gtkfontchooser.h \
  /usr/include/gtk-3.0/gtk/gtkfontchooserdialog.h \
  /usr/include/gtk-3.0/gtk/gtkfontchooserwidget.h \
- /usr/include/gtk-3.0/gtk/gtkgrid.h \
- /usr/include/gtk-3.0/gtk/gtkheaderbar.h \
- /usr/include/gtk-3.0/gtk/gtkicontheme.h \
+ /usr/include/gtk-3.0/gtk/gtkgradient.h \
  /usr/include/gtk-3.0/gtk/gtkstylecontext.h \
  /usr/include/gtk-3.0/gtk/gtkstyleprovider.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkiconfactory.h \
+ /usr/include/gtk-3.0/gtk/gtkiconfactory.h \
  /usr/include/gtk-3.0/gtk/gtkstyleproperties.h \
+ /usr/include/gtk-3.0/gtk/gtksymboliccolor.h \
+ /usr/include/gtk-3.0/gtk/gtkgrid.h \
+ /usr/include/gtk-3.0/gtk/gtkicontheme.h \
  /usr/include/gtk-3.0/gtk/gtkiconview.h \
  /usr/include/gtk-3.0/gtk/gtktooltip.h \
+ /usr/include/gtk-3.0/gtk/gtkimagemenuitem.h \
  /usr/include/gtk-3.0/gtk/gtkimcontextinfo.h \
  /usr/include/gtk-3.0/gtk/gtkimcontextsimple.h \
  /usr/include/gtk-3.0/gtk/gtkimmulticontext.h \
  /usr/include/gtk-3.0/gtk/gtkinfobar.h \
  /usr/include/gtk-3.0/gtk/gtkinvisible.h \
  /usr/include/gtk-3.0/gtk/gtklayout.h \
- /usr/include/gtk-3.0/gtk/gtklevelbar.h \
  /usr/include/gtk-3.0/gtk/gtklinkbutton.h \
- /usr/include/gtk-3.0/gtk/gtklistbox.h \
  /usr/include/gtk-3.0/gtk/gtklockbutton.h \
  /usr/include/gtk-3.0/gtk/gtkmain.h /usr/include/gtk-3.0/gtk/gtkmenubar.h \
- /usr/include/gtk-3.0/gtk/gtkmenubutton.h \
  /usr/include/gtk-3.0/gtk/gtkmenutoolbutton.h \
  /usr/include/gtk-3.0/gtk/gtktoolbutton.h \
  /usr/include/gtk-3.0/gtk/gtktoolitem.h \
@@ -436,31 +437,30 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
  /usr/include/gtk-3.0/gtk/gtkpagesetup.h \
  /usr/include/gtk-3.0/gtk/gtkpapersize.h \
  /usr/include/gtk-3.0/gtk/gtkpaned.h \
- /usr/include/gtk-3.0/gtk/gtkplacessidebar.h \
  /usr/include/gtk-3.0/gtk/gtkprintcontext.h \
  /usr/include/gtk-3.0/gtk/gtkprintoperation.h \
  /usr/include/gtk-3.0/gtk/gtkprintsettings.h \
  /usr/include/gtk-3.0/gtk/gtkprintoperationpreview.h \
  /usr/include/gtk-3.0/gtk/gtkprogressbar.h \
+ /usr/include/gtk-3.0/gtk/gtkradioaction.h \
+ /usr/include/gtk-3.0/gtk/gtktoggleaction.h \
  /usr/include/gtk-3.0/gtk/gtkradiobutton.h \
  /usr/include/gtk-3.0/gtk/gtkradiomenuitem.h \
  /usr/include/gtk-3.0/gtk/gtkradiotoolbutton.h \
  /usr/include/gtk-3.0/gtk/gtktoggletoolbutton.h \
  /usr/include/gtk-3.0/gtk/gtkrange.h \
- /usr/include/gtk-3.0/gtk/gtkrecentchooser.h \
+ /usr/include/gtk-3.0/gtk/gtkrecentaction.h \
  /usr/include/gtk-3.0/gtk/gtkrecentmanager.h \
+ /usr/include/gtk-3.0/gtk/gtkrecentchooser.h \
  /usr/include/gtk-3.0/gtk/gtkrecentfilter.h \
  /usr/include/gtk-3.0/gtk/gtkrecentchooserdialog.h \
  /usr/include/gtk-3.0/gtk/gtkrecentchoosermenu.h \
  /usr/include/gtk-3.0/gtk/gtkrecentchooserwidget.h \
- /usr/include/gtk-3.0/gtk/gtkrevealer.h \
  /usr/include/gtk-3.0/gtk/gtkscale.h \
  /usr/include/gtk-3.0/gtk/gtkscalebutton.h \
  /usr/include/gtk-3.0/gtk/gtkscrollable.h \
  /usr/include/gtk-3.0/gtk/gtkscrollbar.h \
  /usr/include/gtk-3.0/gtk/gtkscrolledwindow.h \
- /usr/include/gtk-3.0/gtk/gtksearchbar.h \
- /usr/include/gtk-3.0/gtk/gtksearchentry.h \
  /usr/include/gtk-3.0/gtk/gtkseparator.h \
  /usr/include/gtk-3.0/gtk/gtkseparatormenuitem.h \
  /usr/include/gtk-3.0/gtk/gtkseparatortoolitem.h \
@@ -469,9 +469,6 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
  /usr/include/gtk-3.0/gtk/gtksizerequest.h \
  /usr/include/gtk-3.0/gtk/gtkspinbutton.h \
  /usr/include/gtk-3.0/gtk/gtkspinner.h \
- /usr/include/gtk-3.0/gtk/gtkstack.h \
- /usr/include/gtk-3.0/gtk/gtkstackswitcher.h \
- /usr/include/gtk-3.0/gtk/gtkstack.h \
  /usr/include/gtk-3.0/gtk/gtkstatusbar.h \
  /usr/include/gtk-3.0/gtk/gtkstatusicon.h \
  /usr/include/gtk-3.0/gtk/gtkswitch.h \
@@ -491,19 +488,14 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
  /usr/include/gtk-3.0/gtk/gtktreeselection.h \
  /usr/include/gtk-3.0/gtk/gtktreestore.h \
  /usr/include/gtk-3.0/gtk/gtktypebuiltins.h \
+ /usr/include/gtk-3.0/gtk/gtkuimanager.h \
  /usr/include/gtk-3.0/gtk/gtkversion.h \
  /usr/include/gtk-3.0/gtk/gtkviewport.h \
  /usr/include/gtk-3.0/gtk/gtkvolumebutton.h \
  /usr/include/gtk-3.0/gtk/gtkwidgetpath.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkactivatable.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkaction.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkactiongroup.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkstock.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkcolorsel.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkcolorseldialog.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkfontsel.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkgradient.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtksymboliccolor.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkhandlebox.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkhbbox.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h \
@@ -512,15 +504,10 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
  /usr/include/gtk-3.0/gtk/deprecated/gtkhscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkhscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkimagemenuitem.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkradioaction.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtktoggleaction.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkrc.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkrecentaction.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkstyle.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtktable.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtktearoffmenuitem.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkuimanager.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvbbox.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvpaned.h \
@@ -1120,10 +1107,6 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 
 /usr/include/gtk-3.0/gdk/gdkenumtypes.h:
 
-/usr/include/gtk-3.0/gdk/gdkframeclock.h:
-
-/usr/include/gtk-3.0/gdk/gdkframetimings.h:
-
 /usr/include/gtk-3.0/gdk/gdkkeys.h:
 
 /usr/include/gtk-3.0/gdk/gdkkeysyms.h:
@@ -1246,7 +1229,15 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 
 /usr/include/gtk-3.0/gtk/gtkaccessible.h:
 
+/usr/include/gtk-3.0/gtk/gtkaction.h:
+
 /usr/include/gtk-3.0/gtk/gtkactionable.h:
+
+/usr/include/gtk-3.0/gtk/gtkactiongroup.h:
+
+/usr/include/gtk-3.0/gtk/gtkstock.h:
+
+/usr/include/gtk-3.0/gtk/gtkactivatable.h:
 
 /usr/include/gtk-3.0/gtk/gtkadjustment.h:
 
@@ -1406,23 +1397,27 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 
 /usr/include/gtk-3.0/gtk/gtkfontchooserwidget.h:
 
-/usr/include/gtk-3.0/gtk/gtkgrid.h:
-
-/usr/include/gtk-3.0/gtk/gtkheaderbar.h:
-
-/usr/include/gtk-3.0/gtk/gtkicontheme.h:
+/usr/include/gtk-3.0/gtk/gtkgradient.h:
 
 /usr/include/gtk-3.0/gtk/gtkstylecontext.h:
 
 /usr/include/gtk-3.0/gtk/gtkstyleprovider.h:
 
-/usr/include/gtk-3.0/gtk/deprecated/gtkiconfactory.h:
+/usr/include/gtk-3.0/gtk/gtkiconfactory.h:
 
 /usr/include/gtk-3.0/gtk/gtkstyleproperties.h:
+
+/usr/include/gtk-3.0/gtk/gtksymboliccolor.h:
+
+/usr/include/gtk-3.0/gtk/gtkgrid.h:
+
+/usr/include/gtk-3.0/gtk/gtkicontheme.h:
 
 /usr/include/gtk-3.0/gtk/gtkiconview.h:
 
 /usr/include/gtk-3.0/gtk/gtktooltip.h:
+
+/usr/include/gtk-3.0/gtk/gtkimagemenuitem.h:
 
 /usr/include/gtk-3.0/gtk/gtkimcontextinfo.h:
 
@@ -1436,19 +1431,13 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 
 /usr/include/gtk-3.0/gtk/gtklayout.h:
 
-/usr/include/gtk-3.0/gtk/gtklevelbar.h:
-
 /usr/include/gtk-3.0/gtk/gtklinkbutton.h:
-
-/usr/include/gtk-3.0/gtk/gtklistbox.h:
 
 /usr/include/gtk-3.0/gtk/gtklockbutton.h:
 
 /usr/include/gtk-3.0/gtk/gtkmain.h:
 
 /usr/include/gtk-3.0/gtk/gtkmenubar.h:
-
-/usr/include/gtk-3.0/gtk/gtkmenubutton.h:
 
 /usr/include/gtk-3.0/gtk/gtkmenutoolbutton.h:
 
@@ -1480,8 +1469,6 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 
 /usr/include/gtk-3.0/gtk/gtkpaned.h:
 
-/usr/include/gtk-3.0/gtk/gtkplacessidebar.h:
-
 /usr/include/gtk-3.0/gtk/gtkprintcontext.h:
 
 /usr/include/gtk-3.0/gtk/gtkprintoperation.h:
@@ -1491,6 +1478,10 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 /usr/include/gtk-3.0/gtk/gtkprintoperationpreview.h:
 
 /usr/include/gtk-3.0/gtk/gtkprogressbar.h:
+
+/usr/include/gtk-3.0/gtk/gtkradioaction.h:
+
+/usr/include/gtk-3.0/gtk/gtktoggleaction.h:
 
 /usr/include/gtk-3.0/gtk/gtkradiobutton.h:
 
@@ -1502,9 +1493,11 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 
 /usr/include/gtk-3.0/gtk/gtkrange.h:
 
-/usr/include/gtk-3.0/gtk/gtkrecentchooser.h:
+/usr/include/gtk-3.0/gtk/gtkrecentaction.h:
 
 /usr/include/gtk-3.0/gtk/gtkrecentmanager.h:
+
+/usr/include/gtk-3.0/gtk/gtkrecentchooser.h:
 
 /usr/include/gtk-3.0/gtk/gtkrecentfilter.h:
 
@@ -1513,8 +1506,6 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 /usr/include/gtk-3.0/gtk/gtkrecentchoosermenu.h:
 
 /usr/include/gtk-3.0/gtk/gtkrecentchooserwidget.h:
-
-/usr/include/gtk-3.0/gtk/gtkrevealer.h:
 
 /usr/include/gtk-3.0/gtk/gtkscale.h:
 
@@ -1525,10 +1516,6 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 /usr/include/gtk-3.0/gtk/gtkscrollbar.h:
 
 /usr/include/gtk-3.0/gtk/gtkscrolledwindow.h:
-
-/usr/include/gtk-3.0/gtk/gtksearchbar.h:
-
-/usr/include/gtk-3.0/gtk/gtksearchentry.h:
 
 /usr/include/gtk-3.0/gtk/gtkseparator.h:
 
@@ -1545,12 +1532,6 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 /usr/include/gtk-3.0/gtk/gtkspinbutton.h:
 
 /usr/include/gtk-3.0/gtk/gtkspinner.h:
-
-/usr/include/gtk-3.0/gtk/gtkstack.h:
-
-/usr/include/gtk-3.0/gtk/gtkstackswitcher.h:
-
-/usr/include/gtk-3.0/gtk/gtkstack.h:
 
 /usr/include/gtk-3.0/gtk/gtkstatusbar.h:
 
@@ -1590,6 +1571,8 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 
 /usr/include/gtk-3.0/gtk/gtktypebuiltins.h:
 
+/usr/include/gtk-3.0/gtk/gtkuimanager.h:
+
 /usr/include/gtk-3.0/gtk/gtkversion.h:
 
 /usr/include/gtk-3.0/gtk/gtkviewport.h:
@@ -1598,23 +1581,11 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 
 /usr/include/gtk-3.0/gtk/gtkwidgetpath.h:
 
-/usr/include/gtk-3.0/gtk/deprecated/gtkactivatable.h:
-
-/usr/include/gtk-3.0/gtk/deprecated/gtkaction.h:
-
-/usr/include/gtk-3.0/gtk/deprecated/gtkactiongroup.h:
-
-/usr/include/gtk-3.0/gtk/deprecated/gtkstock.h:
-
 /usr/include/gtk-3.0/gtk/deprecated/gtkcolorsel.h:
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkcolorseldialog.h:
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkfontsel.h:
-
-/usr/include/gtk-3.0/gtk/deprecated/gtkgradient.h:
-
-/usr/include/gtk-3.0/gtk/deprecated/gtksymboliccolor.h:
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkhandlebox.h:
 
@@ -1632,23 +1603,13 @@ src/ClientOSG/Client.d: ../src/ClientOSG/Client.cpp \
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:
 
-/usr/include/gtk-3.0/gtk/deprecated/gtkimagemenuitem.h:
-
-/usr/include/gtk-3.0/gtk/deprecated/gtkradioaction.h:
-
-/usr/include/gtk-3.0/gtk/deprecated/gtktoggleaction.h:
-
 /usr/include/gtk-3.0/gtk/deprecated/gtkrc.h:
-
-/usr/include/gtk-3.0/gtk/deprecated/gtkrecentaction.h:
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkstyle.h:
 
 /usr/include/gtk-3.0/gtk/deprecated/gtktable.h:
 
 /usr/include/gtk-3.0/gtk/deprecated/gtktearoffmenuitem.h:
-
-/usr/include/gtk-3.0/gtk/deprecated/gtkuimanager.h:
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkvbbox.h:
 

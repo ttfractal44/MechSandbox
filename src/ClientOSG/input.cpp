@@ -11,9 +11,9 @@ namespace Client {
 
 void updateMouseMode() {
 	if (captureMouse) {
-		SDL_SetRelativeMouseMode(SDL_TRUE);
+		SDL_SetRelativeMouseMode((SDL_bool)SDL_TRUE);
 	} else {
-		SDL_SetRelativeMouseMode(SDL_FALSE);
+		SDL_SetRelativeMouseMode((SDL_bool)SDL_FALSE);
 		SDL_WarpMouseInWindow(sdlWindow, windowWidth/2, windowHeight/2);
 	}
 }
@@ -52,15 +52,60 @@ void getUserEvents() {
 				camera->pitch-=(float)(event.motion.yrel)/cameraSensitivity;
 			}
 			else {
-
+				// GDK Event 3 (GDK_MOTION_NOTIFY)
+				//GdkEvent *newEvent = new GdkEvent();
+				//newEvent->type = GDK_MOTION_NOTIFY;
+				/*GdkEvent *newEvent = gdk_event_new(GDK_MOTION_NOTIFY);
+				//((GdkEventMotion*)newEvent)->time = 0;
+				((GdkEventMotion*)newEvent)->x = event.motion.x;
+				((GdkEventMotion*)newEvent)->y = event.motion.y;
+				((GdkEventMotion*)newEvent)->window = gtk_widget_get_window(gtkWindow);
+				((GdkEventMotion*)newEvent)->device = gtk_get_current_event_device();*/
+				//assert(((GdkEventMotion*)newEvent)->device);
+				//gdk_event_put(newEvent);
+				//gdk_display_put_event(gdk_display_get_default(), newEvent);
+				//gtk_propagate_event(gtkWindow, newEvent);
+				//gtk_main_do_event(newEvent);
 			}
 			//printf("Mousemotion %d,%d\n",width,height);
 			break;
 		case (SDL_MOUSEBUTTONDOWN):
-				if (event.button.button==SDL_BUTTON_RIGHT) {
-					captureMouse=!captureMouse;
-					updateMouseMode();
-				}
+			if (event.button.button==SDL_BUTTON_RIGHT) {
+				captureMouse=!captureMouse;
+				updateMouseMode();
+			}
+			if (!captureMouse && event.button.button==SDL_BUTTON_LEFT) {
+				// GDK Event 4 (GDK_BUTTON_PRESS)
+				/*//GdkEvent *newEvent = new GdkEvent();
+				//newEvent->type = GDK_BUTTON_PRESS;
+				GdkEvent *newEvent = gdk_event_new(GDK_BUTTON_PRESS);
+				((GdkEventButton*)newEvent)->time = 0;
+				((GdkEventButton*)newEvent)->x = event.motion.x;
+				((GdkEventButton*)newEvent)->y = event.motion.y;
+				((GdkEventButton*)newEvent)->window = gtk_widget_get_window(gtkWindow);
+				((GdkEventMotion*)newEvent)->device = gtk_get_current_event_device();
+				gdk_event_put(newEvent);
+				//gdk_display_put_event(gdk_display_get_default(), newEvent);
+				//gtk_propagate_event(gtkWindow, newEvent);
+				//gtk_main_do_event(newEvent);*/
+			}
+			break;
+		case (SDL_MOUSEBUTTONUP):
+			if (!captureMouse && event.button.button==SDL_BUTTON_LEFT) {
+				// GDK Event 7 (GDK_BUTTON_RELEASE)
+				/*//GdkEvent *newEvent = new GdkEvent();
+				//newEvent->type = GDK_BUTTON_RELEASE;
+				GdkEvent *newEvent = gdk_event_new(GDK_BUTTON_RELEASE);
+				((GdkEventButton*)newEvent)->time = 0;
+				((GdkEventButton*)newEvent)->x = event.motion.x;
+				((GdkEventButton*)newEvent)->y = event.motion.y;
+				((GdkEventButton*)newEvent)->window = gtk_widget_get_window(gtkWindow);
+				((GdkEventMotion*)newEvent)->device = gtk_get_current_event_device();
+				gdk_event_put(newEvent);
+				//gdk_display_put_event(gdk_display_get_default(), newEvent);
+				//gtk_propagate_event(gtkWindow, newEvent);
+				//gtk_main_do_event(newEvent);*/
+			}
 			break;
 		}
 	}

@@ -20,6 +20,7 @@
 #include <osgGA/FirstPersonManipulator>
 #include <osgViewer/ViewerEventHandlers>
 #include <string>
+#include <assert.h>
 
 #include "CustomViewer.h"
 #include "Camera.h"

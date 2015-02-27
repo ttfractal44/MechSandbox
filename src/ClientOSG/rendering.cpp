@@ -118,11 +118,13 @@ void initRendering() {
 	interfaceInstRect->push_back(3);
 	interfaceGeometry->addPrimitiveSet(interfaceInstRect);
 
+	float interfaceAlpha = 0.5f;
+
 	osg::Vec4Array* colors = new osg::Vec4Array;
-	colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 0.75f));
-	colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 0.75f));
-	colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 0.75f));
-	colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, 0.75f));
+	colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, interfaceAlpha));
+	colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, interfaceAlpha));
+	colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, interfaceAlpha));
+	colors->push_back(osg::Vec4(1.0f, 1.0f, 1.0f, interfaceAlpha));
 	interfaceGeometry->setColorArray(colors);
 
 	interfaceGeometry->setColorBinding(osg::Geometry::BIND_PER_VERTEX);

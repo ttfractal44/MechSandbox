@@ -70,7 +70,7 @@ namespace Engine {
 	};*/
 
 	struct IndexedMesh {
-		std::vector<GLfloat> vertices;
+		std::vector<graphicsGeomVertex> vertices;
 		std::vector<GLuint> elements;
 		GLuint numelements;
 	};
