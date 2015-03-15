@@ -8,34 +8,38 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
-#include <gtk/gtk.h>
+/*#include <gtk/gtk.h>
 #include <gdk/gdk.h>
-#include <gdk/gdkx.h>
-//#include <gtkgl/gtkglarea.h>
 #include <osgViewer/Viewer>
 #include <SDL2/SDL.h>
-#include <assert.h>
+#include <assert.h>*/
 
 #include "../misc/config.h"
 #include "../misc/utils.h"
 
 namespace Client {
+class Client;
+}
+
+#include "GraphicsWindow.h"
+#include "ToolWindow.h"
+
+namespace Client {
 
 class Client {
+	friend class GraphicsWindow;
+	friend class ToolWindow;
 public:
 	virtual ~Client();
 	Client();
 	void initializeGraphics();
 	void destroyGraphics();
 	void main();
-	bool quitClientOnDestroyGraphics;
-	GtkWidget* interface;
-	GtkWidget* graphicsFrame;
+	std::vector<GraphicsWindow*> graphicsWindows;
+	std::map<Uint32, GraphicsWindow*> sdlWindowIDMap;
+	std::vector<ToolWindow*> toolWindows;
 private:
-	GtkWidget* window;
-	SDL_Window* sdlWindow;
 	bool runmain;
-	bool graphics;
 };
 
 void destroyGraphicsCallback(Client* _this);

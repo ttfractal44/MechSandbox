@@ -12,14 +12,10 @@ namespace Client {
 int updateFPSInterval = 60;  // Update FPS counter every 60 frames
 bool printFPS = false;
 
-SDL_Window* sdlWindow;
+/*SDL_Window* sdlWindow;
 SDL_GLContext sdlglContext;
 
 GtkWidget *gtkWindow;
-/*GLuint interfaceTexture;
-GLuint interfaceShaderProgram;
-GLuint interfaceVertexArrayId;
-GLuint interfaceVertexBufferId;*/
 GdkPixbuf *gtkWindowPixbuf;
 
 osgViewer::Viewer* osg_viewer;
@@ -32,16 +28,16 @@ osg::Geode* interfaceGeode;
 osg::Geometry* interfaceGeometry;
 osg::Texture2D* interfaceTexture;
 osg::Image* interfaceImage;
-osg::Group* sceneRoot;
+osg::Group* sceneRoot;*/
 
 bool runloop = false;
 
-bool captureMouse = false;
+/*bool captureMouse = false;
 int controlStyle = 2;
 float cameraSensitivity = 1000;
 float movementSpeed = 0.5;
 int windowWidth = 1066;
-int windowHeight = 600;
+int windowHeight = 600;*/
 
 //World::Camera* viewCamera;
 //World::Camera* controlledCamera;

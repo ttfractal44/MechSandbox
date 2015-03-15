@@ -1,7 +1,10 @@
 src/main.d: ../src/main.cpp ../src/Client/Client.h \
- /usr/include/gtk-3.0/gtk/gtk.h /usr/include/gtk-3.0/gdk/gdk.h \
- /usr/include/gtk-3.0/gdk/gdkconfig.h /usr/include/glib-2.0/glib.h \
- /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
+ ../src/Client/../misc/config.h ../src/Client/../misc/utils.h \
+ ../src/Client/GraphicsWindow.h ../src/Client/Client.h \
+ ../src/Client/ToolWindow.h /usr/include/gtk-3.0/gtk/gtk.h \
+ /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
+ /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
+ /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
  /usr/include/glib-2.0/glib/gversionmacros.h \
@@ -530,29 +533,19 @@ src/main.d: ../src/main.cpp ../src/Client/Client.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvpaned.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gdk/gdkx.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11applaunchcontext.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11cursor.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11device.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11device-core.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11device-xi2.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11devicemanager.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11devicemanager-core.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11devicemanager-xi2.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11display.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11displaymanager.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11dnd.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11keys.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11property.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11screen.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11selection.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11utils.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11visual.h \
- /usr/include/gtk-3.0/gdk/x11/gdkx11window.h \
- ../src/Client/../misc/config.h ../src/Client/../misc/utils.h
+ /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h
 
 ../src/Client/Client.h:
+
+../src/Client/../misc/config.h:
+
+../src/Client/../misc/utils.h:
+
+../src/Client/GraphicsWindow.h:
+
+../src/Client/Client.h:
+
+../src/Client/ToolWindow.h:
 
 /usr/include/gtk-3.0/gtk/gtk.h:
 
@@ -1693,45 +1686,3 @@ src/main.d: ../src/main.cpp ../src/Client/Client.h \
 /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h:
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
-
-/usr/include/gtk-3.0/gdk/gdkx.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11applaunchcontext.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11cursor.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11device.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11device-core.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11device-xi2.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11devicemanager.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11devicemanager-core.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11devicemanager-xi2.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11display.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11displaymanager.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11dnd.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11keys.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11property.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11screen.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11selection.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11utils.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11visual.h:
-
-/usr/include/gtk-3.0/gdk/x11/gdkx11window.h:
-
-../src/Client/../misc/config.h:
-
-../src/Client/../misc/utils.h:
