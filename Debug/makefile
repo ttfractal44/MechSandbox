@@ -9,7 +9,9 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/misc/subdir.mk
--include src/ClientOSG/subdir.mk
+-include src/World/subdir.mk
+-include src/Model/subdir.mk
+-include src/Client/subdir.mk
 -include src/subdir.mk
 -include subdir.mk
 -include objects.mk

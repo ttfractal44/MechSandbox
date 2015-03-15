@@ -25,5 +25,7 @@ C_UPPER_DEPS :=
 SUBDIRS := \
 src/misc \
 src \
-src/ClientOSG \
+src/World \
+src/Model \
+src/Client \
 
