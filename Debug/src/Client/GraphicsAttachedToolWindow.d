@@ -1,4 +1,6 @@
-src/Client/Client.d: ../src/Client/Client.cpp ../src/Client/Client.h \
+src/Client/GraphicsAttachedToolWindow.d: \
+ ../src/Client/GraphicsAttachedToolWindow.cpp \
+ ../src/Client/GraphicsAttachedToolWindow.h ../src/Client/Client.h \
  ../src/Client/../misc/config.h ../src/Client/../misc/utils.h \
  ../src/Client/libraries.h /usr/include/gtk-3.0/gtk/gtk.h \
  /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
@@ -528,8 +530,9 @@ src/Client/Client.d: ../src/Client/Client.cpp ../src/Client/Client.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- ../src/Client/GraphicsWindow.h \
- ../src/Client/GraphicsAttachedToolWindow.h ../src/Client/ToolWindow.h
+ ../src/Client/GraphicsWindow.h ../src/Client/ToolWindow.h
+
+../src/Client/GraphicsAttachedToolWindow.h:
 
 ../src/Client/Client.h:
 
@@ -1668,7 +1671,5 @@ src/Client/Client.d: ../src/Client/Client.cpp ../src/Client/Client.h \
 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 
 ../src/Client/GraphicsWindow.h:
-
-../src/Client/GraphicsAttachedToolWindow.h:
 
 ../src/Client/ToolWindow.h:

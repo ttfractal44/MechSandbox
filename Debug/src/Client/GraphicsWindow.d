@@ -1,7 +1,7 @@
 src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
  ../src/Client/GraphicsWindow.h ../src/Client/Client.h \
  ../src/Client/../misc/config.h ../src/Client/../misc/utils.h \
- ../src/Client/ToolWindow.h /usr/include/gtk-3.0/gtk/gtk.h \
+ ../src/Client/libraries.h /usr/include/gtk-3.0/gtk/gtk.h \
  /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
  /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
  /usr/include/glib-2.0/glib/gtypes.h \
@@ -12,7 +12,7 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
  /usr/include/glib-2.0/glib/gasyncqueue.h \
  /usr/include/glib-2.0/glib/gthread.h \
  /usr/include/glib-2.0/glib/gatomic.h /usr/include/glib-2.0/glib/gerror.h \
- /usr/include/glib-2.0/glib/gquark.h /usr/include/glib-2.0/glib/gutils.h \
+ /usr/include/glib-2.0/glib/gquark.h \
  /usr/include/glib-2.0/glib/gbacktrace.h \
  /usr/include/glib-2.0/glib/gbase64.h \
  /usr/include/glib-2.0/glib/gbitlock.h \
@@ -36,6 +36,7 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
  /usr/include/glib-2.0/glib/gmain.h /usr/include/glib-2.0/glib/gpoll.h \
  /usr/include/glib-2.0/glib/gslist.h /usr/include/glib-2.0/glib/gstring.h \
  /usr/include/glib-2.0/glib/gunicode.h \
+ /usr/include/glib-2.0/glib/gutils.h \
  /usr/include/glib-2.0/glib/gkeyfile.h \
  /usr/include/glib-2.0/glib/gmappedfile.h \
  /usr/include/glib-2.0/glib/gmarkup.h \
@@ -66,7 +67,6 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
  /usr/include/glib-2.0/glib/deprecated/gmain.h \
  /usr/include/glib-2.0/glib/deprecated/grel.h \
  /usr/include/glib-2.0/glib/deprecated/gthread.h \
- /usr/include/glib-2.0/glib/glib-autocleanups.h \
  /usr/include/gtk-3.0/gdk/gdkversionmacros.h \
  /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h \
  /usr/include/glib-2.0/gio/gio.h /usr/include/glib-2.0/gio/giotypes.h \
@@ -88,7 +88,6 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
  /usr/include/glib-2.0/gobject/gtypeplugin.h \
  /usr/include/glib-2.0/gobject/gvaluearray.h \
  /usr/include/glib-2.0/gobject/gvaluetypes.h \
- /usr/include/glib-2.0/gobject/gobject-autocleanups.h \
  /usr/include/glib-2.0/gio/gaction.h \
  /usr/include/glib-2.0/gio/gactiongroup.h \
  /usr/include/glib-2.0/gio/gactiongroupexporter.h \
@@ -178,7 +177,6 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
  /usr/include/glib-2.0/gio/gactiongroup.h \
  /usr/include/glib-2.0/gio/gactionmap.h \
  /usr/include/glib-2.0/gio/gsimpleasyncresult.h \
- /usr/include/glib-2.0/gio/gsimpleiostream.h \
  /usr/include/glib-2.0/gio/gsimplepermission.h \
  /usr/include/glib-2.0/gio/gsocketclient.h \
  /usr/include/glib-2.0/gio/gsocketconnectable.h \
@@ -224,9 +222,6 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
  /usr/include/glib-2.0/gio/gmenuexporter.h \
  /usr/include/glib-2.0/gio/gdbusmenumodel.h \
  /usr/include/glib-2.0/gio/gnotification.h \
- /usr/include/glib-2.0/gio/glistmodel.h \
- /usr/include/glib-2.0/gio/gliststore.h \
- /usr/include/glib-2.0/gio/gio-autocleanups.h \
  /usr/include/gtk-3.0/gdk/gdktypes.h /usr/include/pango-1.0/pango/pango.h \
  /usr/include/pango-1.0/pango/pango-attributes.h \
  /usr/include/pango-1.0/pango/pango-font.h \
@@ -533,7 +528,8 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvpaned.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
- /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h
+ /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
+ ../src/Client/GraphicsAttachedToolWindow.h ../src/Client/ToolWindow.h
 
 ../src/Client/GraphicsWindow.h:
 
@@ -543,7 +539,7 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
 
 ../src/Client/../misc/utils.h:
 
-../src/Client/ToolWindow.h:
+../src/Client/libraries.h:
 
 /usr/include/gtk-3.0/gtk/gtk.h:
 
@@ -574,8 +570,6 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
 /usr/include/glib-2.0/glib/gerror.h:
 
 /usr/include/glib-2.0/glib/gquark.h:
-
-/usr/include/glib-2.0/glib/gutils.h:
 
 /usr/include/glib-2.0/glib/gbacktrace.h:
 
@@ -636,6 +630,8 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
 /usr/include/glib-2.0/glib/gstring.h:
 
 /usr/include/glib-2.0/glib/gunicode.h:
+
+/usr/include/glib-2.0/glib/gutils.h:
 
 /usr/include/glib-2.0/glib/gkeyfile.h:
 
@@ -703,8 +699,6 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
 
 /usr/include/glib-2.0/glib/deprecated/gthread.h:
 
-/usr/include/glib-2.0/glib/glib-autocleanups.h:
-
 /usr/include/gtk-3.0/gdk/gdkversionmacros.h:
 
 /usr/include/gtk-3.0/gdk/gdkapplaunchcontext.h:
@@ -750,8 +744,6 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
 /usr/include/glib-2.0/gobject/gvaluearray.h:
 
 /usr/include/glib-2.0/gobject/gvaluetypes.h:
-
-/usr/include/glib-2.0/gobject/gobject-autocleanups.h:
 
 /usr/include/glib-2.0/gio/gaction.h:
 
@@ -937,8 +929,6 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
 
 /usr/include/glib-2.0/gio/gsimpleasyncresult.h:
 
-/usr/include/glib-2.0/gio/gsimpleiostream.h:
-
 /usr/include/glib-2.0/gio/gsimplepermission.h:
 
 /usr/include/glib-2.0/gio/gsocketclient.h:
@@ -1032,12 +1022,6 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
 /usr/include/glib-2.0/gio/gdbusmenumodel.h:
 
 /usr/include/glib-2.0/gio/gnotification.h:
-
-/usr/include/glib-2.0/gio/glistmodel.h:
-
-/usr/include/glib-2.0/gio/gliststore.h:
-
-/usr/include/glib-2.0/gio/gio-autocleanups.h:
 
 /usr/include/gtk-3.0/gdk/gdktypes.h:
 
@@ -1684,3 +1668,7 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
 /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h:
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
+
+../src/Client/GraphicsAttachedToolWindow.h:
+
+../src/Client/ToolWindow.h:
