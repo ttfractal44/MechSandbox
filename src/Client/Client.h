@@ -8,18 +8,9 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
-/*#include <gtk/gtk.h>
-#include <gdk/gdk.h>
-#include <osgViewer/Viewer>
-#include <SDL2/SDL.h>
-#include <assert.h>*/
-
 #include "../misc/config.h"
 #include "../misc/utils.h"
-
-namespace Client {
-class Client;
-}
+#include "libraries.h"
 
 #include "GraphicsWindow.h"
 #include "ToolWindow.h"
@@ -29,16 +20,19 @@ namespace Client {
 class Client {
 	friend class GraphicsWindow;
 	friend class ToolWindow;
+	friend class GraphicsAttachedToolWindow;
 public:
 	virtual ~Client();
 	Client();
 	void initializeGraphics();
 	void destroyGraphics();
 	void main();
+	GraphicsWindow* newGraphicsWindow(std::string newWindowTitle, int newWindowWidth, int newWindowHeight);
+	ToolWindow* newToolWindow(std::string newWindowTitle);
+private:
 	std::vector<GraphicsWindow*> graphicsWindows;
 	std::map<Uint32, GraphicsWindow*> sdlWindowIDMap;
 	std::vector<ToolWindow*> toolWindows;
-private:
 	bool runmain;
 };
 

@@ -22,6 +22,10 @@ GraphicsWindow::GraphicsWindow(Client* _client, std::string newWindowTitle, int 
 	windowMovingTimer = 0;
 	lastWindowX=0;
 	lastWindowY=0;
+	//lastFocused=NULL;
+	//secondLastFocused=NULL;
+	//focusChangingTimer = 0;
+	//focused=false;
 }
 
 void GraphicsWindow::realize() {
@@ -37,20 +41,28 @@ void GraphicsWindow::realize() {
 	osg_graphicsWindow = osg_viewer->setUpViewerAsEmbeddedInWindow(0,0,windowWidth,windowHeight);
 	osg_viewer->realize();
 
+}
 
-	// Temporary test
+void GraphicsWindow::windowFocusGained(void* window) {
 
-	childToolWindows.push_back(new ToolWindow(this));
-	childToolWindows.push_back(new ToolWindow(this));
-	childToolWindows.push_back(new ToolWindow(this));
+}
 
-	for (uint i=0; i<childToolWindows.size(); i++) {
-		ToolWindow* toolWindow=childToolWindows.at(i);
-		toolWindow->realize();
-		gtk_window_set_keep_above(GTK_WINDOW(toolWindow->gtkWindow), true);
-	}
+void GraphicsWindow::windowFocusLost(void* window) {
 
+}
 
+void GraphicsWindow::groupFocusGained() {
+
+}
+
+void GraphicsWindow::groupFocusLost() {
+
+}
+
+GraphicsAttachedToolWindow* GraphicsWindow::newAttachedToolWindow(std::string newWindowTitle) {
+	GraphicsAttachedToolWindow* _newToolWindow = new GraphicsAttachedToolWindow(this, newWindowTitle);
+	attachedToolWindows.push_back(_newToolWindow);
+	return _newToolWindow;
 }
 
 void GraphicsWindow::setSceneData(osg::Node* newSceneRoot) {
@@ -70,20 +82,10 @@ void GraphicsWindow::handleEvent(SDL_Event event) {
 	case (SDL_WINDOWEVENT):
 		switch (event.window.event) {
 		case SDL_WINDOWEVENT_FOCUS_GAINED:
-			for (uint i=0; i<childToolWindows.size(); i++) {
-				ToolWindow* toolWindow=childToolWindows.at(i);
-				gtk_window_set_keep_above(GTK_WINDOW(toolWindow->gtkWindow), true);
-			}
+			windowFocusGained(this);
 			break;
 		case SDL_WINDOWEVENT_FOCUS_LOST:
-			for (uint i=0; i<childToolWindows.size(); i++) {
-				ToolWindow* toolWindow=childToolWindows.at(i);
-				gtk_window_set_keep_above(GTK_WINDOW(toolWindow->gtkWindow), true);
-				while (gtk_events_pending()) {  // Process these events as soon as possible
-					gtk_main_iteration();
-				}
-				gtk_window_set_keep_above(GTK_WINDOW(toolWindow->gtkWindow), false);
-			}
+			windowFocusLost(this);
 			break;
 		}
     	int x,y;
@@ -104,8 +106,8 @@ void GraphicsWindow::handleEvent(SDL_Event event) {
 			lastWindowY = y;
 
 			windowMovingTimer=10; // Tell ToolWindow to ignore movement events for next 10 frames
-			for (uint i=0; i<childToolWindows.size(); i++) { // Move all attached ToolWindows relatively
-				ToolWindow* toolWindow=childToolWindows.at(i);
+			for (uint i=0; i<attachedToolWindows.size(); i++) { // Move all attached ToolWindows relatively
+				GraphicsAttachedToolWindow* toolWindow=attachedToolWindows.at(i);
 				gtk_window_move(GTK_WINDOW(toolWindow->gtkWindow), x+toolWindow->relativeWindowX, y+toolWindow->relativeWindowY);
 			}
 			while (gtk_events_pending()) {  // Process these events as soon as possible
@@ -122,6 +124,7 @@ void GraphicsWindow::handleEvent(SDL_Event event) {
 
 void GraphicsWindow::iteration() {
 	if (windowMovingTimer>0) { windowMovingTimer-=1; }
+	//if (focusChangingTimer>0) { focusChangingTimer-=1; }
 	SDL_GL_MakeCurrent(sdlWindow, sdlglContext);
 	osg_viewer->frame();
 	SDL_GL_SwapWindow(sdlWindow);

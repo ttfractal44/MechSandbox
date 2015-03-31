@@ -7,6 +7,9 @@
 
 #include "Client.h"
 
+#include "GraphicsWindow.h"
+#include "ToolWindow.h"
+
 namespace Client {
 
 Client::~Client() {
@@ -125,22 +128,19 @@ void Client::initializeGraphics() {
 
 	gdk_event_handler_set ((GdkEventFunc)gtkEventIntercept, NULL, NULL);*/
 
-	graphicsWindows.push_back(new GraphicsWindow(this, config::windowTitle, config::defaultWindowWidth, config::defaultWindowHeight));
-	graphicsWindows.push_back(new GraphicsWindow(this, config::windowTitle, config::defaultWindowWidth, config::defaultWindowHeight));
-	graphicsWindows.push_back(new GraphicsWindow(this, config::windowTitle, config::defaultWindowWidth, config::defaultWindowHeight));
+}
 
-	//toolWindows.push_back(new ToolWindow());
-	//toolWindows.push_back(new ToolWindow());
-	//toolWindows.push_back(new ToolWindow());
+GraphicsWindow* Client::newGraphicsWindow(std::string newWindowTitle, int newWindowWidth, int newWindowHeight) {
+	GraphicsWindow* _newGraphicsWindow = new GraphicsWindow(this, newWindowTitle, newWindowWidth, newWindowHeight);
+	_newGraphicsWindow->realize();
+	graphicsWindows.push_back(_newGraphicsWindow);
+	return _newGraphicsWindow;
+}
 
-	for (uint i=0; i<graphicsWindows.size(); i++) {
-		GraphicsWindow* graphicsWindow=graphicsWindows.at(i);
-		graphicsWindow->realize();
-	}
-	for (uint i=0; i<toolWindows.size(); i++) {
-		ToolWindow* toolWindow=toolWindows.at(i);
-		toolWindow->realize();
-	}
+ToolWindow* Client::newToolWindow(std::string newWindowTitle) {
+	ToolWindow* _newToolWindow = new ToolWindow(this, newWindowTitle);
+	toolWindows.push_back(_newToolWindow);
+	return _newToolWindow;
 }
 
 void Client::main() {

@@ -5,36 +5,26 @@
  *      Author: theron
  */
 
+#include "Client.h"
+
 #ifndef TOOLWINDOW_H_
 #define TOOLWINDOW_H_
 
-#include <gtk/gtk.h>
-#include <gdk/gdk.h>
-
 namespace Client {
-class ToolWindow;
-}
 
-#include "GraphicsWindow.h"
-
-namespace Client {
+class Client;
 
 class ToolWindow {
 	friend class GraphicsWindow;
+	friend class GraphicsAttachedToolWindow;
 public:
-	ToolWindow();
-	ToolWindow(GraphicsWindow* parent);
+	ToolWindow(Client* _client, std::string newWindowTitle);
 	virtual ~ToolWindow();
-	void realize();
+	void show();
 	void iteration();
-	void configureEvent();
-	void focusOutEvent();
-	void focusInEvent();
 private:
+	Client* client;
 	GtkWidget* gtkWindow;
-	GraphicsWindow* parentGraphicsWindow;
-	int relativeWindowX, relativeWindowY;
-	int lastWindowX, lastWindowY;
 };
 
 } /* namespace Client */
