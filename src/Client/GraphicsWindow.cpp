@@ -44,11 +44,21 @@ void GraphicsWindow::realize() {
 }
 
 void GraphicsWindow::windowFocusGained(void* window) {
-
+	if (window==this) {
+		for (uint i=0; i<attachedToolWindows.size(); i++) {
+			GraphicsAttachedToolWindow* toolWindow=attachedToolWindows.at(i);
+			gtk_window_set_keep_above(GTK_WINDOW(toolWindow->gtkWindow), true);
+		}
+	}
 }
 
 void GraphicsWindow::windowFocusLost(void* window) {
-
+	if (window==this) {
+		for (uint i=0; i<attachedToolWindows.size(); i++) {
+			GraphicsAttachedToolWindow* toolWindow=attachedToolWindows.at(i);
+			gtk_window_set_keep_above(GTK_WINDOW(toolWindow->gtkWindow), false);
+		}
+	}
 }
 
 void GraphicsWindow::groupFocusGained() {
