@@ -21,6 +21,7 @@ public:
 	ToolWindow(Client* _client, std::string newWindowTitle);
 	virtual ~ToolWindow();
 	void show();
+	void setWidget(GtkWidget* widget);
 	void iteration();
 private:
 	Client* client;

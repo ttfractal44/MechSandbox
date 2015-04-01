@@ -15,8 +15,12 @@ ToolWindow::ToolWindow(Client* _client, std::string newWindowTitle) {
 	gtk_window_set_title(GTK_WINDOW(gtkWindow), newWindowTitle.c_str());
 }
 
+void ToolWindow::setWidget(GtkWidget* widget) {
+	gtk_container_add(GTK_CONTAINER(gtkWindow), widget);
+}
+
 void ToolWindow::show() {
-	gtk_widget_show(gtkWindow);
+	gtk_widget_show_all(gtkWindow);
 }
 
 void ToolWindow::iteration() {
