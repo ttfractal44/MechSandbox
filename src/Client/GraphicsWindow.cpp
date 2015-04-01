@@ -79,6 +79,10 @@ void GraphicsWindow::setSceneData(osg::Node* newSceneRoot) {
 	osg_viewer->setSceneData(newSceneRoot);
 }
 
+osg::Camera* GraphicsWindow::getCamera() {
+	return osg_viewer->getCamera();
+}
+
 void GraphicsWindow::handleEvent(SDL_Event event) {
 	switch (event.type) {
 	case (SDL_QUIT):

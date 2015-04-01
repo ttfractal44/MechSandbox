@@ -12,6 +12,7 @@
 #include <gdk/gdk.h>
 #include <string>
 #include <osgViewer/Viewer>
+#include <osg/Camera>
 #include <SDL2/SDL.h>
 
 #endif /* LIBRARIES_H_ */

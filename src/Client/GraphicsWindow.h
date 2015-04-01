@@ -27,6 +27,7 @@ public:
 	void realize();
 	void iteration();
 	void setSceneData(osg::Node* newSceneRoot);
+	osg::Camera* getCamera();
 	void handleEvent(SDL_Event event);
 	GraphicsAttachedToolWindow* newAttachedToolWindow(std::string newWindowTitle);
 private:
