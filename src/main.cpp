@@ -11,10 +11,11 @@
 #include "Client/Client.h"
 #include "Geometry/Drawing.h"
 #include "Geometry/Circle.h"
+#include "Geometry/Line.h"
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-uint res=6;
+uint res=60;
 Geometry::Drawing* drawing1;
 
 void increaseRes() {
@@ -57,6 +58,9 @@ int main() {
 
 	drawing1->curves.push_back(new Geometry::Circle(osg::Vec2(0,0),1.0));
 	drawing1->curves.push_back(new Geometry::Circle(osg::Vec2(1,0),1.0));
+	drawing1->curves.push_back(new Geometry::Line(osg::Vec2(1,0),osg::Vec2(1,1)));
+	drawing1->curves.push_back(new Geometry::Line(osg::Vec2(0,0),osg::Vec2(1,1)));
+
 
 	osg::Geometry* drawing1geometry = drawing1->getDrawable(res);
 

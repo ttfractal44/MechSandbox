@@ -531,7 +531,8 @@ src/main.d: ../src/main.cpp ../src/Client/Client.h \
  ../src/Client/GraphicsWindow.h ../src/Client/Client.h \
  ../src/Client/GraphicsAttachedToolWindow.h ../src/Client/ToolWindow.h \
  ../src/Geometry/Drawing.h ../src/Geometry/Curve.h \
- ../src/Geometry/datatypes.h ../src/Geometry/Circle.h
+ ../src/Geometry/datatypes.h ../src/Geometry/Circle.h \
+ ../src/Geometry/Line.h
 
 ../src/Client/Client.h:
 
@@ -1684,3 +1685,5 @@ src/main.d: ../src/main.cpp ../src/Client/Client.h \
 ../src/Geometry/datatypes.h:
 
 ../src/Geometry/Circle.h:
+
+../src/Geometry/Line.h:

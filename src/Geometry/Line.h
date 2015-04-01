@@ -14,8 +14,11 @@ namespace Geometry {
 
 class Line: public Curve {
 public:
-	Line();
+	Line(osg::Vec2 _p1, osg::Vec2 _p2);
 	virtual ~Line();
+	osg::Vec2 p1;
+	osg::Vec2 p2;
+	Polyline* getPolyline(uint res);
 };
 
 } /* namespace Geometry */

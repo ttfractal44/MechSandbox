@@ -22,6 +22,8 @@ public:
 	std::vector<Curve*> curves;
 private:
 	osg::Geometry* osggeom;
+	osg::Vec2Array* verts;
+	osg::Geometry::PrimitiveSetList primitivesets;
 	uint lastRes;
 	bool meshUpdated;
 };
