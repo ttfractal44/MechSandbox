@@ -529,7 +529,9 @@ src/main.d: ../src/main.cpp ../src/Client/Client.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  ../src/Client/GraphicsWindow.h ../src/Client/Client.h \
- ../src/Client/GraphicsAttachedToolWindow.h ../src/Client/ToolWindow.h
+ ../src/Client/GraphicsAttachedToolWindow.h ../src/Client/ToolWindow.h \
+ ../src/Geometry/Drawing.h ../src/Geometry/Curve.h \
+ ../src/Geometry/datatypes.h ../src/Geometry/Circle.h
 
 ../src/Client/Client.h:
 
@@ -1674,3 +1676,11 @@ src/main.d: ../src/main.cpp ../src/Client/Client.h \
 ../src/Client/GraphicsAttachedToolWindow.h:
 
 ../src/Client/ToolWindow.h:
+
+../src/Geometry/Drawing.h:
+
+../src/Geometry/Curve.h:
+
+../src/Geometry/datatypes.h:
+
+../src/Geometry/Circle.h:

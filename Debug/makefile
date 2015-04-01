@@ -10,7 +10,7 @@ RM := rm -rf
 -include sources.mk
 -include src/misc/subdir.mk
 -include src/World/subdir.mk
--include src/Model/subdir.mk
+-include src/Geometry/subdir.mk
 -include src/Client/subdir.mk
 -include src/subdir.mk
 -include subdir.mk
