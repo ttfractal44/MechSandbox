@@ -18,12 +18,14 @@ Line::~Line() {
 	// TODO Auto-generated destructor stub
 }
 
-Polyline* Line::getPolyline(uint res) {
-	polyline.array.empty();
-	polyline.closed = false;
-	polyline.array.push_back(p1);
-	polyline.array.push_back(p2);
-	return &polyline;
+void Line::generateOsgGeometry(uint res) {
+	verts->clear();
+	elements->clear();
+	verts->push_back(p1);
+	verts->push_back(p2);
+	elements->push_back(0);
+	elements->push_back(1);
+	Curve::generateOsgGeometry(res);
 }
 
 } /* namespace Geometry */

@@ -21,7 +21,8 @@ Geometry::Drawing* drawing1;
 void increaseRes() {
 	res+=1;
 	printf("Resolution = %u\n",res);
-	drawing1->getDrawable(res);
+	//drawing1->getDrawable(res);
+	drawing1->generateOsgGeometry(res);
 }
 
 void decreaseRes() {
@@ -29,7 +30,8 @@ void decreaseRes() {
 		res-=1;
 	}
 	printf("Resolution = %u\n",res);
-	drawing1->getDrawable(res);
+	//drawing1->getDrawable(res);
+	drawing1->generateOsgGeometry(res);
 }
 
 int main() {
@@ -56,18 +58,36 @@ int main() {
 
 	drawing1 = new Geometry::Drawing();
 
-	drawing1->curves.push_back(new Geometry::Circle(osg::Vec2(0,0),1.0));
-	drawing1->curves.push_back(new Geometry::Circle(osg::Vec2(1,0),1.0));
-	drawing1->curves.push_back(new Geometry::Line(osg::Vec2(1,0),osg::Vec2(1,1)));
-	drawing1->curves.push_back(new Geometry::Line(osg::Vec2(0,0),osg::Vec2(1,1)));
+	float radius1 = 1.0;
+	float radius2 = 0.92;
+	drawing1->addCurve(new Geometry::Circle(osg::Vec2(0,0),radius1));
+	drawing1->addCurve(new Geometry::Circle(osg::Vec2(-1,-1),radius2));
+	drawing1->addCurve(new Geometry::Circle(osg::Vec2(1,-1),radius2));
+	drawing1->addCurve(new Geometry::Circle(osg::Vec2(-1,1),radius2));
+	drawing1->addCurve(new Geometry::Circle(osg::Vec2(1,1),radius2));
+	drawing1->addCurve(new Geometry::Line(osg::Vec2(-2,-2),osg::Vec2(2,-2)));
+	drawing1->addCurve(new Geometry::Line(osg::Vec2(2,-2),osg::Vec2(2,2)));
+	drawing1->addCurve(new Geometry::Line(osg::Vec2(2,2),osg::Vec2(-2,2)));
+	drawing1->addCurve(new Geometry::Line(osg::Vec2(-2,2),osg::Vec2(-2,-2)));
+
+	drawing1->addCurve(new Geometry::Line(osg::Vec2(-2,0),osg::Vec2(2,0)));
+	drawing1->addCurve(new Geometry::Line(osg::Vec2(0,-2),osg::Vec2(0,2)));
+
+	drawing1->addCurve(new Geometry::Line(osg::Vec2(-2,-2),osg::Vec2(2,2)));
+	drawing1->addCurve(new Geometry::Line(osg::Vec2(-2,2),osg::Vec2(2,-2)));
 
 
-	osg::Geometry* drawing1geometry = drawing1->getDrawable(res);
+
+	//osg::Geometry* drawing1geometry = drawing1->getDrawable(res);
 
 	osg::Group* root = new osg::Group();
-	osg::Geode* drawing1geode = new osg::Geode();
-	drawing1geode->addDrawable(drawing1geometry);
-	root->addChild(drawing1geode);
+	//osg::Group* root2 = new osg::Group();
+	//osg::Geode* drawing1geode = new osg::Geode();
+	//drawing1geode->addDrawable(drawing1geometry);
+	//root2->addChild(drawing1geode);
+	//root->addChild(root2);
+	root->addChild(drawing1->getOsgGeode());
+	drawing1->generateOsgGeometry(res);
 
 	//osgViewer::Viewer viewer;
 

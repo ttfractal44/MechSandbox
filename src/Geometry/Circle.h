@@ -18,9 +18,7 @@ public:
 	virtual ~Circle();
 	osg::Vec2 center;
 	float radius;
-	Polyline* getPolyline(uint res);
-private:
-
+	void generateOsgGeometry(uint res);
 };
 
 } /* namespace Geometry */

@@ -9,6 +9,7 @@
 #define CURVE_H_
 
 #include "datatypes.h"
+#include <osg/Geometry>
 
 namespace Geometry {
 
@@ -18,9 +19,12 @@ class Curve {
 public:
 	Curve();
 	virtual ~Curve();
-	virtual Polyline* getPolyline(uint res);
+	osg::Geometry* getDrawable();
+	virtual void generateOsgGeometry(uint res);
 private:
-	Polyline polyline;
+	osg::Geometry* osggeom;
+	osg::Vec2Array* verts;
+	osg::DrawElementsUInt* elements;
 };
 
 } /* namespace Geometry */

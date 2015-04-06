@@ -9,6 +9,7 @@
 #define DRAWING_H_
 
 #include <osg/Geometry>
+#include <osg/Geode>
 #include "Curve.h"
 
 namespace Geometry {
@@ -17,15 +18,12 @@ class Drawing {
 public:
 	Drawing();
 	virtual ~Drawing();
-	osg::Geometry* getDrawable(uint res);
-	void markUpdated();
-	std::vector<Curve*> curves;
+	void generateOsgGeometry(uint res);
+	osg::Geode* getOsgGeode();
+	void addCurve(Curve* curve);
 private:
-	osg::Geometry* osggeom;
-	osg::Vec2Array* verts;
-	osg::Geometry::PrimitiveSetList primitivesets;
-	uint lastRes;
-	bool meshUpdated;
+	std::vector<Curve*> curves;
+	osg::Geode* osgnode;
 };
 
 } /* namespace Geometry */

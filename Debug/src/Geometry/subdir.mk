@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/Geometry/Circle.cpp \
+../src/Geometry/CopySequence.cpp \
 ../src/Geometry/Curve.cpp \
 ../src/Geometry/Drawing.cpp \
 ../src/Geometry/Line.cpp \
@@ -12,6 +13,7 @@ CPP_SRCS += \
 
 OBJS += \
 ./src/Geometry/Circle.o \
+./src/Geometry/CopySequence.o \
 ./src/Geometry/Curve.o \
 ./src/Geometry/Drawing.o \
 ./src/Geometry/Line.o \
@@ -19,6 +21,7 @@ OBJS += \
 
 CPP_DEPS += \
 ./src/Geometry/Circle.d \
+./src/Geometry/CopySequence.d \
 ./src/Geometry/Curve.d \
 ./src/Geometry/Drawing.d \
 ./src/Geometry/Line.d \

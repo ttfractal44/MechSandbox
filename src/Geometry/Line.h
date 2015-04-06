@@ -18,7 +18,7 @@ public:
 	virtual ~Line();
 	osg::Vec2 p1;
 	osg::Vec2 p2;
-	Polyline* getPolyline(uint res);
+	void generateOsgGeometry(uint res);
 };
 
 } /* namespace Geometry */

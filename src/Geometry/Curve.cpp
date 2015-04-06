@@ -10,16 +10,25 @@
 namespace Geometry {
 
 Curve::Curve() {
-	// TODO Auto-generated constructor stub
-
+	osggeom = new osg::Geometry();
+	verts = new osg::Vec2Array();
+	//elements = NULL; // MUST BE INITIALIZED BY SUBCLASS
+	elements = new osg::DrawElementsUInt();
+	elements->setMode(osg::PrimitiveSet::LINE_STRIP);
+	osggeom->setVertexArray(verts);
+	osggeom->addPrimitiveSet(elements);
 }
 
 Curve::~Curve() {
-	// TODO Auto-generated destructor stub
+
 }
 
-Polyline* Curve::getPolyline(uint res) {
-	return &polyline;
+osg::Geometry* Curve::getDrawable() {
+	return osggeom;
+}
+
+void Curve::generateOsgGeometry(uint res) {
+	osggeom->dirtyDisplayList();
 }
 
 } /* namespace Geometry */
