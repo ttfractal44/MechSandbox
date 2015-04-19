@@ -26,6 +26,6 @@ SUBDIRS := \
 src/misc \
 src \
 src/World \
-src/Geometry \
+src/Model/Drawing \
 src/Client \
 

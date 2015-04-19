@@ -10,7 +10,7 @@ RM := rm -rf
 -include sources.mk
 -include src/misc/subdir.mk
 -include src/World/subdir.mk
--include src/Geometry/subdir.mk
+-include src/Model/Drawing/subdir.mk
 -include src/Client/subdir.mk
 -include src/subdir.mk
 -include subdir.mk
@@ -48,7 +48,7 @@ all: MechSandbox
 MechSandbox: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	g++ -std=c++11 -L/usr/include/gtk-3.0 -L/usr/include/atk-1.0 -L/usr/include/at-spi2-atk/2.0 -L/usr/include/pango-1.0 -L/usr/include/gio-unix-2.0/ -L/usr/include/cairo -L/usr/include/gdk-pixbuf-2.0 -L/usr/include/glib-2.0 -L/usr/lib/x86_64-linux-gnu/glib-2.0/include -L/usr/include/harfbuzz -L/usr/include/freetype2 -L/usr/include/pixman-1 -L/usr/include/libpng12 -o "MechSandbox" $(OBJS) $(USER_OBJS) $(LIBS) `pkg-config --libs openscenegraph sdl2 glew gtk+-3.0`
+	g++ -L/usr/include/gtk-3.0 -L/usr/include/atk-1.0 -L/usr/include/at-spi2-atk/2.0 -L/usr/include/pango-1.0 -L/usr/include/gio-unix-2.0/ -L/usr/include/cairo -L/usr/include/gdk-pixbuf-2.0 -L/usr/include/glib-2.0 -L/usr/lib/x86_64-linux-gnu/glib-2.0/include -L/usr/include/harfbuzz -L/usr/include/freetype2 -L/usr/include/pixman-1 -L/usr/include/libpng12 -o "MechSandbox" $(OBJS) $(USER_OBJS) $(LIBS) `pkg-config --libs openscenegraph sdl2 glew gtk+-3.0`
 	@echo 'Finished building target: $@'
 	@echo ' '
 

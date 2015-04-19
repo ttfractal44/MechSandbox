@@ -9,9 +9,9 @@
 
 namespace Client {
 
-void configureCallback(GraphicsAttachedToolWindow* _this) { _this->configureEvent(); }
-void focusOutCallback(GraphicsAttachedToolWindow* _this) { _this->focusOutEvent(); }
-void focusInCallback(GraphicsAttachedToolWindow* _this) { _this->focusInEvent(); }
+bool configureCallback(GraphicsAttachedToolWindow* _this) { _this->configureEvent(); return false;}
+bool focusOutCallback(GraphicsAttachedToolWindow* _this) { _this->focusOutEvent(); return false;}
+bool focusInCallback(GraphicsAttachedToolWindow* _this) { _this->focusInEvent(); return false;}
 
 GraphicsAttachedToolWindow::GraphicsAttachedToolWindow(GraphicsWindow* parent, std::string newWindowTitle) : ToolWindow(parent->client, newWindowTitle) {
 	relativeWindowX=0;
