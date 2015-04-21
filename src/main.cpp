@@ -7,6 +7,7 @@
 #include "Model/Drawing/Line.h"
 #include "Model/Drawing/Circle.h"
 #include "Model/Drawing/Union.h"
+#include "Model/Drawing/CopySequence.h"
 #include "Client/Client.h"
 
 Client::Client* client;
@@ -38,11 +39,22 @@ int main() {
 
 	drawing1->addElement(union2);
 
-	union2->addElement(drawing1->addElement(new Model::Drawing::Circle(osg::Vec2(0,0),1)));
+	Model::Drawing::Element* circle1 = drawing1->addElement(new Model::Drawing::Circle(osg::Vec2(0,0),0.1));
+
+	union2->addElement(circle1);
+
+	Model::Drawing::CopySequence* sequence1 = (Model::Drawing::CopySequence*)drawing1->addElement(new Model::Drawing::CopySequence(union2));
+
+	printf("Setting properties\n");
+	sequence1->setTransformationProperties(50, osg::Vec2(0.5,0),M_PI/3,osg::Vec2(0,0));
 
 	//union2->addElement(union2);
 
-	graphics->setSceneData(union2->osgnode);
+	graphics->setSceneData(sequence1->osgnode);
+
+	drawing1->update(100,100);
+
+	sequence1->setTransformationProperties(5, osg::Vec2(0.5,0),M_PI/3,osg::Vec2(0,0));
 
 	drawing1->update(100,100);
 
