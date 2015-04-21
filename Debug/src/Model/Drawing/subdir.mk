@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/Model/Drawing/Circle.cpp \
+../src/Model/Drawing/CopySequence.cpp \
 ../src/Model/Drawing/Curve.cpp \
 ../src/Model/Drawing/Drawing.cpp \
 ../src/Model/Drawing/Element.cpp \
@@ -14,6 +15,7 @@ CPP_SRCS += \
 
 OBJS += \
 ./src/Model/Drawing/Circle.o \
+./src/Model/Drawing/CopySequence.o \
 ./src/Model/Drawing/Curve.o \
 ./src/Model/Drawing/Drawing.o \
 ./src/Model/Drawing/Element.o \
@@ -23,6 +25,7 @@ OBJS += \
 
 CPP_DEPS += \
 ./src/Model/Drawing/Circle.d \
+./src/Model/Drawing/CopySequence.d \
 ./src/Model/Drawing/Curve.d \
 ./src/Model/Drawing/Drawing.d \
 ./src/Model/Drawing/Element.d \
