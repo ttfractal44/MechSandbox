@@ -31,33 +31,34 @@ void CopySequence::setTransformationProperties(uint _copyTimes, osg::Vec2 _trans
 }
 
 void CopySequence::updateImpl(uint depth, uint resoluton) {
-	printf("DEPTH IS %d, COPYTIMES IS %d\n",depth,copyTimes);
-	printf("Updating CopySequence %p\n",this);
 	uint times = std::min(copyTimes, depth); // TODO Potentially I should not be using depth this way (depth is intended for levels of recursion while this is iterative, not recursive)
 	printf("Container is %d while should be %d\n",osgtransforms.size(),times);
 	if (osgtransforms.size()<times) { // Need to create new osgtransforms
 		for (uint i=osgtransforms.size(); i<times; i++) {
-			osg::PositionAttitudeTransform* osgtransform = new osg::PositionAttitudeTransform();
+			osg::MatrixTransform* osgtransform = new osg::MatrixTransform();
 			osgtransforms.push_back(osgtransform);
 			osgnode->addChild(osgtransform);
-			printf("Created new transform in CopySequence %p\n",this);
+			osgtransform->addChild(element->osgnode);
 		}
 	}
 	if (osgtransforms.size()>times) { // Need to delete extra osgtransforms
 		for (uint i=times; i<osgtransforms.size(); i++) {
-			osg::PositionAttitudeTransform* osgtransform = osgtransforms.back();
+			osg::MatrixTransform* osgtransform = osgtransforms.back();
 			osgtransforms.pop_back();
 			osgnode->removeChild(osgtransform);
 			//delete osgtransform;
 		}
 	}
-	osg::Vec2 offset = osg::Vec2(0,0);
+	//osg::Vec2 offset = osg::Vec2(0,0);
+	//float rotation = 0;
+	osg::Matrixd transform;
 	for (uint i=0; i<times; i++) {
-		osg::PositionAttitudeTransform* osgtransform = osgtransforms.at(i);
-		printf("Using offset <%f,%f>\n",offset.x(),offset.y());
-		osgtransform->setPosition(osg::Vec3(offset.x(),offset.y(),0));
-		offset += translationVector;
-		osgtransform->addChild(element->osgnode);
+		osg::MatrixTransform* osgtransform = osgtransforms.at(i);
+		osgtransform->setMatrix(transform);
+		transform *= osg::Matrix::translate(osg::Vec3(translationVector.x(),translationVector.y(),0));
+		transform *= osg::Matrix::translate(osg::Vec3(-rotationCenter.x(),-rotationCenter.y(),0));
+		transform *= osg::Matrix::rotate(rotationRadians, osg::Vec3(0,0,1));
+		transform *= osg::Matrix::translate(osg::Vec3(rotationCenter.x(),rotationCenter.y(),0));
 	}
 }
 

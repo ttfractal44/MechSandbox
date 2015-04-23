@@ -10,7 +10,7 @@
 
 #include "Element.h"
 
-#include <osg/PositionAttitudeTransform>
+#include <osg/MatrixTransform>
 
 namespace Model {
 namespace Drawing {
@@ -24,7 +24,7 @@ public:
 	void updateImpl(uint depth, uint resoluton);
 protected:
 	Element* element;
-	std::deque<osg::PositionAttitudeTransform*> osgtransforms;
+	std::deque<osg::MatrixTransform*> osgtransforms;
 	osg::Vec2 translationVector;
 	osg::Vec2 rotationCenter;
 	float rotationRadians;
