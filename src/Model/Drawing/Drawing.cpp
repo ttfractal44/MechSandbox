@@ -20,6 +20,7 @@ Drawing::~Drawing() {
 
 Element* Drawing::addElement(Element* element) {
 	elements.push_back(element);
+	element->container = this;
 	return element;
 }
 

@@ -12,6 +12,14 @@
 #include <osg/Node>
 #include <osg/Group>
 
+namespace Model {
+namespace Drawing {
+
+class Drawing;
+
+}
+}
+
 #include "Element.h"
 
 namespace Model {

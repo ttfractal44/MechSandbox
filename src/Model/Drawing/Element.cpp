@@ -11,7 +11,7 @@ namespace Model {
 namespace Drawing {
 
 Element::Element() {
-	// TODO Auto-generated constructor stub
+	container = NULL;
 	osgnode = new osg::Group();
 	osggeode = new osg::Geode();
 	osggeom = new osg::Geometry();

@@ -19,6 +19,16 @@
 namespace Model {
 namespace Drawing {
 
+class Element;
+
+}
+}
+
+#include "Drawing.h"
+
+namespace Model {
+namespace Drawing {
+
 class Element { // Base class for all Drawing elements.  Not to be used directly.
 	friend class Drawing;
 public:
@@ -32,6 +42,7 @@ protected:
 	virtual void updateImpl(uint depth, uint resolution); // Update code added by subclass
 	bool updated;
 	bool modifiedSinceUpdate;
+	Drawing* container;
 	osg::Geometry* osggeom;
 	osg::Vec2Array* verts;
 	osg::DrawElementsUInt* drawelements;
