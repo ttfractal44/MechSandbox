@@ -11,6 +11,7 @@ RM := rm -rf
 -include src/misc/subdir.mk
 -include src/World/subdir.mk
 -include src/Model/Drawing/subdir.mk
+-include src/Editor/subdir.mk
 -include src/Client/subdir.mk
 -include src/subdir.mk
 -include subdir.mk

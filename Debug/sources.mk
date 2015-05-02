@@ -27,5 +27,6 @@ src/misc \
 src \
 src/World \
 src/Model/Drawing \
+src/Editor \
 src/Client \
 
