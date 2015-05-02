@@ -39,23 +39,22 @@ int main() {
 
 	drawing1->addElement(union2);
 
-	Model::Drawing::Element* circle1 = drawing1->addElement(new Model::Drawing::Circle(osg::Vec2(0,0),0.1));
-	Model::Drawing::Element* circle2 = drawing1->addElement(new Model::Drawing::Circle(osg::Vec2(0,0),0.2));
-	Model::Drawing::Element* line1 = drawing1->addElement(new Model::Drawing::Line(osg::Vec2(-0.2,0),osg::Vec2(0.2,0)));
+	Model::Drawing::Element* circle1 = drawing1->addElement(new Model::Drawing::Circle(osg::Vec2(0,0),0.01));
+	Model::Drawing::Element* circle2 = drawing1->addElement(new Model::Drawing::Circle(osg::Vec2(0,0),0.02));
+	//Model::Drawing::Element* line1 = drawing1->addElement(new Model::Drawing::Line(osg::Vec2(-0.2,0),osg::Vec2(0.2,0)));
 
 
 	union2->addElement(circle1);
 	union2->addElement(circle2);
-	union2->addElement(line1);
+	//union2->addElement(line1);
 
 	Model::Drawing::CopySequence* sequence1 = (Model::Drawing::CopySequence*)drawing1->addElement(new Model::Drawing::CopySequence(union2));
 
 	Model::Drawing::CopySequence* sequence2 = (Model::Drawing::CopySequence*)drawing1->addElement(new Model::Drawing::CopySequence(sequence1));
 
-	printf("Setting properties\n");
 	//sequence1->setTransformationProperties(60, osg::Vec2(0,0),M_PI/30.0,osg::Vec2(0,0));
-	sequence1->setTransformationProperties(100, osg::Vec2(0.1,0),0.02,osg::Vec2(0,0));
-	sequence2->setTransformationProperties(100, osg::Vec2(0,0.1),0.01,osg::Vec2(0,0));
+	sequence1->setTransformationProperties(100, osg::Vec2(0.02,0),0.0,osg::Vec2(0,0));
+	sequence2->setTransformationProperties(100, osg::Vec2(0,0.02),0.0,osg::Vec2(0,0));
 
 
 	//union2->addElement(union2);
