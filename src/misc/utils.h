@@ -25,20 +25,20 @@ std::string readResource(std::string path);
 template <typename Type>
 struct InstanceCallData {
 	Type* object;
-	void* (Type::*method)(void*);
+	void (Type::*method)(void*);
 	void* data;
 };
 
 template <typename Type>
 void call_instance_member(InstanceCallData<Type>* call_data) {
 	Type* object = call_data->object;
-	void* (Type::*method)(void*) = call_data->method;
+	void (Type::*method)(void*) = call_data->method;
 	void* data = call_data->data;
 	(object->*method)(data);
 }
 
 template <typename Type>
-void hack_g_signal_connect_classmember(void * instance, const char * detailed_signal, Type* object, void* (Type::*method)(void*), void* data) { // THIS WORKS (3)
+void hack_g_signal_connect_classmember(void * instance, const char * detailed_signal, Type* object, void (Type::*method)(void*), void* data) {
 	// Hack to GTK3 to allow a member function of an object to be passed as a callback to a GTK widget
 
 	InstanceCallData<Type>* call_data;
@@ -49,6 +49,12 @@ void hack_g_signal_connect_classmember(void * instance, const char * detailed_si
 
 	g_signal_connect_swapped(instance, detailed_signal, G_CALLBACK(call_instance_member<Type>), call_data);
 
+}
+
+template <typename Type>
+void hack_g_signal_connect_classmember(void * instance, const char * detailed_signal, Type* object, void (Type::*method)()) {
+	//hack_g_signal_connect_classmember<Type>(instance, detailed_signal, object, (void* (Type::*)(void*))method, NULL);
+	hack_g_signal_connect_classmember<Type>(instance, detailed_signal, object, (void (Type::*)(void*))(method), NULL);
 }
 
 #endif /* UTILS_H_ */
