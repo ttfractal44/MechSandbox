@@ -12,6 +12,8 @@
 
 #include "GraphicsAttachedToolWindow.h"
 
+//#include "../misc/Callback.h"
+
 namespace Client {
 
 class GraphicsWindow {
@@ -30,6 +32,8 @@ public:
 	osg::Camera* getCamera();
 	void handleEvent(SDL_Event event);
 	GraphicsAttachedToolWindow* newAttachedToolWindow(std::string newWindowTitle);
+	//void setEventHandler(Callback* _eventHandler);
+	//void setKeystateHandler(Callback* _keystateHandler);
 private:
 	Client* client;
 	std::vector<GraphicsAttachedToolWindow*> attachedToolWindows;
@@ -49,6 +53,9 @@ private:
 	//void* lastFocused; // Do not dereference!
 	//void* secondLastFocused; // Do not dereference!
 	uint focusCount=0;
+	//Callback* eventHandler;
+	//Callback* keystateHandler;
+	bool focused;
 };
 
 } /* namespace Client */

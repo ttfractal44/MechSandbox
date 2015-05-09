@@ -10,7 +10,8 @@
 namespace Model {
 namespace Drawing {
 
-Drawing::Drawing() {
+Drawing::Drawing(std::string _name) {
+	name = _name;
 	osggroup = new osg::Group();
 }
 

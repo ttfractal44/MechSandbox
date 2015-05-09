@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/misc/UCallback.cpp \
 ../src/misc/utils.cpp 
 
 OBJS += \
+./src/misc/UCallback.o \
 ./src/misc/utils.o 
 
 CPP_DEPS += \
+./src/misc/UCallback.d \
 ./src/misc/utils.d 
 
 

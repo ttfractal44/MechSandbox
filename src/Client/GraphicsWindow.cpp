@@ -26,6 +26,11 @@ GraphicsWindow::GraphicsWindow(Client* _client, std::string newWindowTitle, int 
 	//secondLastFocused=NULL;
 	//focusChangingTimer = 0;
 	//focused=false;
+	//eventHandler=NULL;
+}
+
+GraphicsWindow::~GraphicsWindow() {
+	// TODO Auto-generated destructor stub
 }
 
 void GraphicsWindow::realize() {
@@ -96,9 +101,11 @@ void GraphicsWindow::handleEvent(SDL_Event event) {
 	case (SDL_WINDOWEVENT):
 		switch (event.window.event) {
 		case SDL_WINDOWEVENT_FOCUS_GAINED:
+			focused=true;
 			windowFocusGained(this);
 			break;
 		case SDL_WINDOWEVENT_FOCUS_LOST:
+			focused=false;
 			windowFocusLost(this);
 			break;
 		}
@@ -134,6 +141,16 @@ void GraphicsWindow::handleEvent(SDL_Event event) {
     	break;
 	}
 
+	/*if (eventHandler) {
+		//callback_call<void>((void*)(&event), eventHandler);
+		callback_call(&event, eventHandler);
+	}
+
+	if (focused && keystateHandler) {
+		const Uint8* keystate = SDL_GetKeyboardState(NULL);
+		//callback_call(&keystate, keystateHandler);
+	}*/
+
 }
 
 void GraphicsWindow::iteration() {
@@ -144,8 +161,12 @@ void GraphicsWindow::iteration() {
 	SDL_GL_SwapWindow(sdlWindow);
 }
 
-GraphicsWindow::~GraphicsWindow() {
-	// TODO Auto-generated destructor stub
+/*void GraphicsWindow::setEventHandler(Callback* _eventHandler) {
+	eventHandler = _eventHandler;
 }
+
+void GraphicsWindow::setKeystateHandler(Callback* _keystateHandler) {
+	keystateHandler = _keystateHandler;
+}*/
 
 } /* namespace Client */

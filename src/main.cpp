@@ -9,9 +9,10 @@
 #include "Model/Drawing/Union.h"
 #include "Model/Drawing/CopySequence.h"
 #include "Client/Client.h"
+#include "Editor/Editor.h"
 
 Client::Client* client;
-Client::GraphicsWindow* graphics;
+//Client::GraphicsWindow* graphics;
 osg::Camera* camera;
 Model::Drawing::Drawing* drawing1;
 Model::Drawing::Element* union1;
@@ -20,8 +21,9 @@ Model::Drawing::Union* union2;
 int main() {
 	client = new Client::Client();
 	client->initializeGraphics();
-	graphics = client->newGraphicsWindow("Graphics", 800, 600);
-	drawing1 = new Model::Drawing::Drawing();
+	//graphics = client->newGraphicsWindow("Graphics", 800, 600);
+	client->newGraphicsWindow("Graphics", 80, 60);
+	drawing1 = new Model::Drawing::Drawing("drawing1");
 
 	/*union1 = drawing1->addElement(new Model::Drawing::Union());
 
@@ -53,13 +55,13 @@ int main() {
 	Model::Drawing::CopySequence* sequence2 = (Model::Drawing::CopySequence*)drawing1->addElement(new Model::Drawing::CopySequence(sequence1));
 
 	//sequence1->setTransformationProperties(60, osg::Vec2(0,0),M_PI/30.0,osg::Vec2(0,0));
-	sequence1->setTransformationProperties(100, osg::Vec2(0.02,0),0.0,osg::Vec2(0,0));
-	sequence2->setTransformationProperties(100, osg::Vec2(0,0.02),0.0,osg::Vec2(0,0));
+	sequence1->setTransformationProperties(10, osg::Vec2(0.2,0),0.0,osg::Vec2(0,0));
+	sequence2->setTransformationProperties(10, osg::Vec2(0,0.2),0.0,osg::Vec2(0,0));
 
 
 	//union2->addElement(union2);
 
-	graphics->setSceneData(sequence2->osgnode);
+	//graphics->setSceneData(sequence2->osgnode);
 
 	drawing1->update(1000000,100);
 
@@ -67,10 +69,11 @@ int main() {
 
 	//drawing1->update(100,100);
 
-	camera = graphics->getCamera();
+	//camera = graphics->getCamera();
 
-	camera->setViewMatrixAsLookAt(osg::Vec3(1,1,10),osg::Vec3(1,1,0),osg::Vec3(0,1,0));
+	//camera->setViewMatrixAsLookAt(osg::Vec3(1,1,10),osg::Vec3(1,1,0),osg::Vec3(0,1,0));
 
+	/*Editor::Editor* editor = */new Editor::Editor(client, drawing1);
 
 	client->main();
 	printf("Main exited\n");

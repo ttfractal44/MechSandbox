@@ -27,11 +27,12 @@ namespace Drawing {
 
 class Drawing {
 public:
-	Drawing();
+	Drawing(std::string _name);
 	virtual ~Drawing();
 	osg::Group* osggroup;
 	Element* addElement(Element* element); // Adds element to drawing, returns pointer to element
 	void update(uint depth, uint resolution); // Update all Elements in Drawing
+	std::string name;
 private:
 	std::deque<Element*> elements;
 };

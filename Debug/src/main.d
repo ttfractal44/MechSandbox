@@ -4,10 +4,10 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
  ../src/Model/Drawing/Curve.h ../src/Model/Drawing/Circle.h \
  ../src/Model/Drawing/Union.h ../src/Model/Drawing/CopySequence.h \
  ../src/Client/Client.h ../src/Client/../misc/config.h \
- ../src/Client/../misc/utils.h ../src/Client/libraries.h \
- /usr/include/gtk-3.0/gtk/gtk.h /usr/include/gtk-3.0/gdk/gdk.h \
- /usr/include/gtk-3.0/gdk/gdkconfig.h /usr/include/glib-2.0/glib.h \
- /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
+ ../src/Client/../misc/utils.h /usr/include/gtk-3.0/gtk/gtk.h \
+ /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
+ /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
+ /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
  /usr/include/glib-2.0/glib/gversionmacros.h \
@@ -532,8 +532,15 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
+ ../src/Client/../misc/../misc/strings.h ../src/Client/libraries.h \
  ../src/Client/GraphicsWindow.h ../src/Client/Client.h \
- ../src/Client/GraphicsAttachedToolWindow.h ../src/Client/ToolWindow.h
+ ../src/Client/GraphicsAttachedToolWindow.h ../src/Client/ToolWindow.h \
+ ../src/Editor/Editor.h ../src/Editor/../Model/Drawing/Drawing.h \
+ ../src/Editor/../Client/GraphicsWindow.h \
+ ../src/Editor/../Client/Client.h ../src/Editor/../Client/ToolWindow.h \
+ ../src/Editor/../Client/GraphicsAttachedToolWindow.h \
+ ../src/Editor/../Client/Client.h ../src/Editor/../misc/config.h \
+ ../src/Editor/../misc/utils.h ../src/Editor/../misc/UCallback.h
 
 ../src/Model/Drawing/Drawing.h:
 
@@ -558,8 +565,6 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
 ../src/Client/../misc/config.h:
 
 ../src/Client/../misc/utils.h:
-
-../src/Client/libraries.h:
 
 /usr/include/gtk-3.0/gtk/gtk.h:
 
@@ -1689,6 +1694,10 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 
+../src/Client/../misc/../misc/strings.h:
+
+../src/Client/libraries.h:
+
 ../src/Client/GraphicsWindow.h:
 
 ../src/Client/Client.h:
@@ -1696,3 +1705,23 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
 ../src/Client/GraphicsAttachedToolWindow.h:
 
 ../src/Client/ToolWindow.h:
+
+../src/Editor/Editor.h:
+
+../src/Editor/../Model/Drawing/Drawing.h:
+
+../src/Editor/../Client/GraphicsWindow.h:
+
+../src/Editor/../Client/Client.h:
+
+../src/Editor/../Client/ToolWindow.h:
+
+../src/Editor/../Client/GraphicsAttachedToolWindow.h:
+
+../src/Editor/../Client/Client.h:
+
+../src/Editor/../misc/config.h:
+
+../src/Editor/../misc/utils.h:
+
+../src/Editor/../misc/UCallback.h:

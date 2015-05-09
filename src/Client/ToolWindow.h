@@ -22,10 +22,14 @@ public:
 	virtual ~ToolWindow();
 	void show();
 	void setWidget(GtkWidget* widget);
+	//void setCloseFunction(void (*_closeFunction)(void*), void* data);
+	void setCloseFunction(GCallback _closeFunction, void* data);
 	void iteration();
 private:
 	Client* client;
 	GtkWidget* gtkWindow;
+	//void (*closeFunction)(void*);
+	GCallback closeFunction;
 };
 
 } /* namespace Client */

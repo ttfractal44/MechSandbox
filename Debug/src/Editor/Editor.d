@@ -5,8 +5,7 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
  ../src/Editor/../Client/GraphicsWindow.h \
  ../src/Editor/../Client/Client.h \
  ../src/Editor/../Client/../misc/config.h \
- ../src/Editor/../Client/../misc/utils.h \
- ../src/Editor/../Client/libraries.h /usr/include/gtk-3.0/gtk/gtk.h \
+ ../src/Editor/../Client/../misc/utils.h /usr/include/gtk-3.0/gtk/gtk.h \
  /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
  /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
  /usr/include/glib-2.0/glib/gtypes.h \
@@ -534,11 +533,15 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
+ ../src/Editor/../Client/../misc/../misc/strings.h \
+ ../src/Editor/../Client/libraries.h \
  ../src/Editor/../Client/GraphicsWindow.h \
  ../src/Editor/../Client/GraphicsAttachedToolWindow.h \
  ../src/Editor/../Client/ToolWindow.h \
  ../src/Editor/../Client/ToolWindow.h \
- ../src/Editor/../Client/GraphicsAttachedToolWindow.h
+ ../src/Editor/../Client/GraphicsAttachedToolWindow.h \
+ ../src/Editor/../Client/Client.h ../src/Editor/../misc/config.h \
+ ../src/Editor/../misc/utils.h ../src/Editor/../misc/UCallback.h
 
 ../src/Editor/Editor.h:
 
@@ -555,8 +558,6 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
 ../src/Editor/../Client/../misc/config.h:
 
 ../src/Editor/../Client/../misc/utils.h:
-
-../src/Editor/../Client/libraries.h:
 
 /usr/include/gtk-3.0/gtk/gtk.h:
 
@@ -1686,6 +1687,10 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 
+../src/Editor/../Client/../misc/../misc/strings.h:
+
+../src/Editor/../Client/libraries.h:
+
 ../src/Editor/../Client/GraphicsWindow.h:
 
 ../src/Editor/../Client/GraphicsAttachedToolWindow.h:
@@ -1695,3 +1700,11 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
 ../src/Editor/../Client/ToolWindow.h:
 
 ../src/Editor/../Client/GraphicsAttachedToolWindow.h:
+
+../src/Editor/../Client/Client.h:
+
+../src/Editor/../misc/config.h:
+
+../src/Editor/../misc/utils.h:
+
+../src/Editor/../misc/UCallback.h:
