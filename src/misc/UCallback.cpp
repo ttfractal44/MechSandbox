@@ -9,41 +9,14 @@
 
 
 
-UCallback::UCallback( void* (*_function)(void*, void*) , void* _userdataP , bool _swapped=false ) {
+UCallback::UCallback( void* (*_function)(void*, void*) , void* _userdataP , bool _swapped, bool _returns ) {
 	function = _function;
 	userdataP = _userdataP;
 	swapped = _swapped;
+	returns = _returns;
 	classmode = false;
 	templateclasscallback_destroyfunction = NULL;
 }
-
-UCallback::UCallback( void* (*function)(void*) ) /* No userdata requested */ : UCallback((void* (*)(void*,void*))(function), NULL, false) {}
-
-UCallback::UCallback( void* (*function)(void*) , void* userdataP ) /* No callerdata requested */ : UCallback((void* (*)(void*,void*))(function), userdataP, true) {}
-
-/*template <typename Class> UCallback::UCallback(Class* object, void* (Class::*_function)(void*, void*) , void* _userdataP , bool _swapped=false) {
-	function = &utemplateclasscallback_call<Class>;
-	userdataP = new UTemplateClassCallback<Class>{object, _function, _userdataP, false};  // Repurposing userdataP like this is probably a bad idea.  Consider a different variable and special case handling in call()
-	swapped = _swapped;
-	classmode = true;
-	templateclasscallback_destroyfunction = &utemplateclasscallback_destroy<Class>;
-}*/
-
-/*template <typename Class> UClassCallback<Class>::UClassCallback() {
-
-}*/
-
-/*template <typename Class> UClassCallback<Class>::UClassCallback(Class* object, void* (Class::*_function)(void*, void*) , void* _userdataP , bool _swapped=false) {
-	function = &utemplateclasscallback_call<Class>;
-	userdataP = new UTemplateClassCallback<Class>{object, _function, _userdataP, false};  // Repurposing userdataP like this is probably a bad idea.  Consider a different variable and special case handling in call()
-	swapped = _swapped;
-	classmode = true;
-	templateclasscallback_destroyfunction = &utemplateclasscallback_destroy<Class>;
-}*/
-
-//template <typename Class> UCallback::UCallback(Class* object, void* (Class::*function)(void*) ) /* No userdata requested */ : UCallback(object, (void* (Class::*)(void*,void*))(function), NULL, false) {}
-
-//template <typename Class> UCallback::UCallback(Class* object, void* (Class::*function)(void*) , void* userdataP ) /* No callerdata requested */ : UCallback(object, (void* (Class::*)(void*,void*))(function), userdataP, true) {}
 
 UCallback::~UCallback() {
 	if (classmode) {
@@ -52,8 +25,6 @@ UCallback::~UCallback() {
 		templateclasscallback_destroyfunction(userdataP);
 	}
 }
-
-
 
 void* UCallback::call(void* callerdataP) {
 	if (!swapped) { // NOT swapped
