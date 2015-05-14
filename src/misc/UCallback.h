@@ -11,6 +11,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+class Bogus { };
+
 #define UCALLBACK( function, userdataP ) /* Standard function mode */ \
 	new UCallback( (void* (*)(void*, void*)) (function) , userdataP, false, true ) // swapped=false, returns=true
 
@@ -25,17 +27,17 @@
 
 
 
-#define UCLASSCALLBACK( type, object, function, userdataP ) /* Standard function mode */ \
-	make_new_UClassCallback( object, (void* (type::*)(void*, void*)) (function) , userdataP, false, true ) // swapped=false, returns=true
+#define UCLASSCALLBACK( object, function, userdataP ) /* Standard function mode */ \
+	make_new_UClassCallback_bogus( object, (void* (Bogus::*)(void*, void*)) (function) , userdataP, false, true ) // swapped=false, returns=true
 
-#define UCLASSCALLBACK_SWAPPED( type, object, function, userdataP ) /* Swapped */ \
-	make_new_UClassCallback( object, (void* (type::*)(void*, void*)) (function) , userdataP, true, true ) // swapped=true, returns=true
+#define UCLASSCALLBACK_SWAPPED( object, function, userdataP ) /* Swapped */ \
+	make_new_UClassCallback_bogus( object, (void* (Bogus::*)(void*, void*)) (function) , userdataP, true, true ) // swapped=true, returns=true
 
-#define UCLASSCALLBACK_VOID( type, object, function, userdataP ) /* Standard function mode */ \
-	make_new_UClassCallback( object, (void* (type::*)(void*, void*)) (function) , userdataP, false, false ) // swapped=false, returns=false
+#define UCLASSCALLBACK_VOID( object, function, userdataP ) /* Standard function mode */ \
+	make_new_UClassCallback_bogus( object, (void* (Bogus::*)(void*, void*)) (function) , userdataP, false, false ) // swapped=false, returns=false
 
-#define UCLASSCALLBACK_VOID_SWAPPED( type, object, function, userdataP ) /* Swapped */ \
-	make_new_UClassCallback( object, (void* (type::*)(void*, void*)) (function) , userdataP, true, false ) // swapped=true, returns=false
+#define UCLASSCALLBACK_VOID_SWAPPED( object, function, userdataP ) /* Swapped */ \
+	make_new_UClassCallback_bogus( object, (void* (Bogus::*)(void*, void*)) (function) , userdataP, true, false ) // swapped=true, returns=false
 
 class UCallback {
 protected:
@@ -97,9 +99,9 @@ class UClassCallback : public UCallback {
 	- UClassCallback<Class>::UClassCallback(Class*, void* (Class::*)(void*, void*), void*, bool) [with Class = Editor::Editor]
 	 */
 public:
-	UClassCallback(Class* object, void* (Class::*_function)(void*, void*) , void* _userdataP , bool _swapped, bool _returns) : UCallback((void* (*)(void *, void *))NULL, NULL, false, true) {
+	UClassCallback(Class* object, void* (Bogus::*_function)(void*, void*) , void* _userdataP , bool _swapped, bool _returns) : UCallback((void* (*)(void *, void *))NULL, NULL, false, true) {
 		function = (void* (*)(void*, void*))(&utemplateclasscallback_call<Class>);
-		userdataP = new UTemplateClassCallback<Class>{object, _function, _userdataP, _swapped};  // Repurposing userdataP like this is probably a bad idea.  Consider a different variable and special case handling in call()
+		userdataP = new UTemplateClassCallback<Class>{object, (void* (Class::*)(void*, void*))_function, _userdataP, _swapped};  // Repurposing userdataP like this is probably a bad idea.  Consider a different variable and special case handling in call()
 		swapped = false;
 		returns = _returns;
 		classmode = true;
@@ -128,18 +130,8 @@ UCallback* make_new_UClassCallback(Class* object, void* (Class::*function)(void*
 }
 
 template <typename Class>
-UCallback* make_new_UClassCallback(Class* object, void* (Class::*function)(void*) , void* userdataP , bool swapped, bool returns) {
-	return new UClassCallback<Class>(object, (void* (*)(void*, void*)) (function), userdataP, swapped, returns);
-}
-
-template <typename Class>
-UCallback* make_new_UClassCallback(Class* object, void (Class::*function)(void*, void*) , void* userdataP , bool swapped, bool returns) {
-	return new UClassCallback<Class>(object, (void* (*)(void*, void*)) (function), userdataP, swapped, returns);
-}
-
-template <typename Class>
-UCallback* make_new_UClassCallback(Class* object, void (Class::*function)(void*) , void* userdataP , bool swapped, bool returns) {
-	return new UClassCallback<Class>(object, (void* (*)(void*, void*)) (function), userdataP, swapped, returns);
+UCallback* make_new_UClassCallback_bogus(Class* object, void* (Bogus::*function)(void*, void*) , void* userdataP , bool swapped, bool returns) {
+	return new UClassCallback<Class>(object, function, userdataP, swapped, returns);
 }
 
 #endif /* UCALLBACK_H_ */
