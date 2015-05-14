@@ -11,8 +11,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-class Bogus { }; // Allows casting without knowing real class name in macros
-
 #define UCALLBACK( function, userdataP ) /* Standard function mode */ \
 	new UCallback( (void* (*)(void*, void*)) (function) , userdataP, false, true ) // swapped=false, returns=true
 
@@ -25,7 +23,7 @@ class Bogus { }; // Allows casting without knowing real class name in macros
 #define UCALLBACK_VOID_SWAPPED( function, userdataP ) /* Swapped */ \
 	new UCallback( (void* (*)(void*, void*)) (function) , userdataP, true, false ) // swapped=true, returns=false
 
-
+class Bogus { }; // Allows casting without knowing real class name in macros
 
 #define UCLASSCALLBACK( object, function, userdataP ) /* Standard function mode */ \
 	make_new_UClassCallback_bogus( object, (void* (Bogus::*)(void*, void*)) (function) , userdataP, false, true ) // swapped=false, returns=true
@@ -49,20 +47,6 @@ protected:
 	void (*templateclasscallback_destroyfunction)(void*);
 public:
 	UCallback( void* (*function)(void*, void*) , void* userdataP , bool swapped, bool returns );  // Standard function mode
-
-//	UCallback( void* (*function)(void*) ) /* No userdata requested */ :
-//		UCallback((void* (*)(void*,void*))(function), NULL, false) {}
-//	UCallback( void* (*function)(void*) , void* userdataP ) /* No callerdata requested */ :
-//		UCallback((void* (*)(void*,void*))(function), userdataP, true) {}
-//
-//	// No returns
-//	UCallback( void (*function)(void*, void*) , void* userdataP , bool swapped ) :
-//		UCallback((void* (*)(void*, void*))(function), userdataP, swapped ) { returns=false; }
-//	UCallback( void (*function)(void*) ) /* No userdata requested */ :
-//		UCallback((void (*)(void*,void*))(function), NULL, false) {}
-//	UCallback( void (*function)(void*) , void* userdataP ) /* No callerdata requested */ :
-//		UCallback((void (*)(void*,void*))(function), userdataP, true) {}
-
 	virtual ~UCallback();
 	void* call(void* callerdataP);
 };
@@ -88,16 +72,11 @@ void* utemplateclasscallback_call(void* callerdataP, UTemplateClassCallback<Clas
 
 template <typename Class>
 void utemplateclasscallback_destroy(UTemplateClassCallback<Class>* callback) {
-
+	delete callback;
 }
 
 template <typename Class>
 class UClassCallback : public UCallback {
-	/*
-	Multiple markers at this line
-	- candidate expects 4 arguments, 5 provided
-	- UClassCallback<Class>::UClassCallback(Class*, void* (Class::*)(void*, void*), void*, bool) [with Class = Editor::Editor]
-	 */
 public:
 	UClassCallback(Class* object, void* (Bogus::*_function)(void*, void*) , void* _userdataP , bool _swapped, bool _returns) : UCallback((void* (*)(void *, void *))NULL, NULL, false, true) {
 		function = (void* (*)(void*, void*))(&utemplateclasscallback_call<Class>);
@@ -107,21 +86,9 @@ public:
 		classmode = true;
 		templateclasscallback_destroyfunction = (void (*)(void*))(&utemplateclasscallback_destroy<Class>);
 	}
-
-//	UClassCallback(Class* object, void* (Class::*function)(void*) ) /* No userdata requested */ :
-//		UClassCallback(object, (void* (Class::*)(void*,void*))(function), NULL, false) {}
-//	UClassCallback(Class* object, void* (Class::*function)(void*) , void* userdataP ) /* No callerdata requested */ :
-//		UClassCallback(object, (void* (Class::*)(void*,void*))(function), userdataP, true) {}
-//
-//	UClassCallback(Class* object, void (Class::*function)(void*, void*) , void* userdataP , bool swapped=false) :
-//		UClassCallback(object, (void* (Class::*)(void*, void*))(function), userdataP, swapped) { returns = false; }
-//
-//	UClassCallback(Class* object, void (Class::*function)(void*) ) /* No userdata requested */ :
-//		UClassCallback(object, (void (Class::*)(void*,void*))(function), NULL, false) {}
-//	UClassCallback(Class* object, void (Class::*function)(void*) , void* userdataP ) /* No callerdata requested */ :
-//		UClassCallback(object, (void (Class::*)(void*,void*))(function), userdataP, true) {}
-
-	virtual ~UClassCallback() { }
+	virtual ~UClassCallback() {
+		templateclasscallback_destroyfunction(userdataP);
+	}
 };
 
 template <typename Class>
