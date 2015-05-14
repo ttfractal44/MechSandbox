@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-class Bogus { };
+class Bogus { }; // Allows casting without knowing real class name in macros
 
 #define UCALLBACK( function, userdataP ) /* Standard function mode */ \
 	new UCallback( (void* (*)(void*, void*)) (function) , userdataP, false, true ) // swapped=false, returns=true
