@@ -25,8 +25,11 @@ GraphicsWindow::GraphicsWindow(Client* _client, std::string newWindowTitle, int 
 	//lastFocused=NULL;
 	//secondLastFocused=NULL;
 	//focusChangingTimer = 0;
-	//focused=false;
-	//eventHandler=NULL;
+	focused=false;
+	eventHandler=NULL;
+	keystateHandler=NULL;
+	mouseFollowWidget=NULL;
+	mouseFollowWindow=NULL;
 }
 
 GraphicsWindow::~GraphicsWindow() {
@@ -46,6 +49,8 @@ void GraphicsWindow::realize() {
 	osg_graphicsWindow = osg_viewer->setUpViewerAsEmbeddedInWindow(0,0,windowWidth,windowHeight);
 	osg_viewer->realize();
 
+	SDL_ShowCursor(0);
+
 }
 
 void GraphicsWindow::windowFocusGained(void* window) {
@@ -54,6 +59,12 @@ void GraphicsWindow::windowFocusGained(void* window) {
 			GraphicsAttachedToolWindow* toolWindow=attachedToolWindows.at(i);
 			gtk_window_set_keep_above(GTK_WINDOW(toolWindow->gtkWindow), true);
 		}
+		if (mouseFollowWindow) {
+			//gtk_widget_show(mouseFollowWindow);
+			gtk_window_set_keep_above(GTK_WINDOW(mouseFollowWindow), true);
+		}
+	} else {
+		SDL_RaiseWindow(sdlWindow);
 	}
 }
 
@@ -62,6 +73,10 @@ void GraphicsWindow::windowFocusLost(void* window) {
 		for (uint i=0; i<attachedToolWindows.size(); i++) {
 			GraphicsAttachedToolWindow* toolWindow=attachedToolWindows.at(i);
 			gtk_window_set_keep_above(GTK_WINDOW(toolWindow->gtkWindow), false);
+		}
+		if (mouseFollowWindow) {
+			//gtk_widget_hide(mouseFollowWindow);
+			gtk_window_set_keep_above(GTK_WINDOW(mouseFollowWindow), false);
 		}
 	}
 }
@@ -78,6 +93,37 @@ GraphicsAttachedToolWindow* GraphicsWindow::newAttachedToolWindow(std::string ne
 	GraphicsAttachedToolWindow* _newToolWindow = new GraphicsAttachedToolWindow(this, newWindowTitle);
 	attachedToolWindows.push_back(_newToolWindow);
 	return _newToolWindow;
+}
+
+void GraphicsWindow::setMouseFollowWidget(GtkWidget* widget) {
+	mouseFollowWindow = widget;
+}
+
+void GraphicsWindow::showMouseFollowWidget() {
+	if (mouseFollowWindow) {
+		printf("Mouse-following Widget is already visible\n");
+	} else {
+		//mouseFollowWindow = gtk_window_new(GTK_WINDOW_POPUP);
+		mouseFollowWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+		gtk_window_set_decorated(GTK_WINDOW(mouseFollowWindow), false);
+		gtk_window_set_skip_taskbar_hint(GTK_WINDOW(mouseFollowWindow), true);
+		gtk_window_set_keep_above(GTK_WINDOW(mouseFollowWindow), true);
+		//gtk_widget_set_opacity(mouseFollowWindow, 0.5);
+		gtk_widget_set_visual(mouseFollowWindow, gdk_screen_get_rgba_visual(gdk_screen_get_default()));
+		GdkRGBA color = {0,0,0,0};
+		gtk_widget_override_background_color(mouseFollowWindow, GTK_STATE_FLAG_NORMAL, &color);
+		gtk_window_resize(GTK_WINDOW(mouseFollowWindow),128,32);
+		//gtk_window_move(GTK_WINDOW(mouseFollowWindow),960,540);
+		gtk_widget_show_all(mouseFollowWindow);
+		//g_signal_connect(mouseFollowWindow, "enter-notify-event", G_CALLBACK(gtk_widget_hide), NULL);
+		//g_signal_connect(mouseFollowWindow, "leave-notify-event", G_CALLBACK(gtk_widget_show), NULL);
+		//gtk_container_add(GTK_CONTAINER(mouseFollowWindow), mouseFollowWidget);
+	}
+}
+
+void GraphicsWindow::hideMouseFollowWidget() {
+	gtk_container_remove(GTK_CONTAINER(mouseFollowWindow), mouseFollowWidget);
+	gtk_widget_destroy(mouseFollowWindow);
 }
 
 void GraphicsWindow::setSceneData(osg::Node* newSceneRoot) {
@@ -98,6 +144,11 @@ void GraphicsWindow::handleEvent(SDL_Event event) {
 			break;
 		}
 		break;
+	case (SDL_MOUSEMOTION):
+		if (mouseFollowWindow) {
+			gtk_window_move(GTK_WINDOW(mouseFollowWindow),lastWindowX+event.motion.x+32,lastWindowY+event.motion.y+48);
+		}
+		break;
 	case (SDL_WINDOWEVENT):
 		switch (event.window.event) {
 		case SDL_WINDOWEVENT_FOCUS_GAINED:
@@ -109,6 +160,7 @@ void GraphicsWindow::handleEvent(SDL_Event event) {
 			windowFocusLost(this);
 			break;
 		}
+
     	int x,y;
 		SDL_GetWindowPosition(sdlWindow, &x, &y);
 		if (x!=9 || y!=8) { // Fix for strange SDL2 behavior reporting position of (9,8) during any resize - Are these numbers the same on all Desktop Environments or just mine?
@@ -141,15 +193,11 @@ void GraphicsWindow::handleEvent(SDL_Event event) {
     	break;
 	}
 
-	/*if (eventHandler) {
+	if (eventHandler) {
 		//callback_call<void>((void*)(&event), eventHandler);
-		callback_call(&event, eventHandler);
+		//ucallback_call(&event, eventHandler);
+		eventHandler->call(&event);
 	}
-
-	if (focused && keystateHandler) {
-		const Uint8* keystate = SDL_GetKeyboardState(NULL);
-		//callback_call(&keystate, keystateHandler);
-	}*/
 
 }
 
@@ -157,16 +205,27 @@ void GraphicsWindow::iteration() {
 	if (windowMovingTimer>0) { windowMovingTimer-=1; }
 	//if (focusChangingTimer>0) { focusChangingTimer-=1; }
 	SDL_GL_MakeCurrent(sdlWindow, sdlglContext);
+
+	if (focused && keystateHandler) {
+		const Uint8* keystate = SDL_GetKeyboardState(NULL);
+		//callback_call(&keystate, keystateHandler);
+		keystateHandler->call(&keystate);
+	}
+
 	osg_viewer->frame();
 	SDL_GL_SwapWindow(sdlWindow);
 }
 
-/*void GraphicsWindow::setEventHandler(Callback* _eventHandler) {
+void GraphicsWindow::setEventHandler(UCallback* _eventHandler) {
 	eventHandler = _eventHandler;
 }
 
-void GraphicsWindow::setKeystateHandler(Callback* _keystateHandler) {
+void GraphicsWindow::setKeystateHandler(UCallback* _keystateHandler) {
 	keystateHandler = _keystateHandler;
-}*/
+}
+
+void GraphicsWindow::getSize(int* width, int* height) {
+	SDL_GetWindowSize(sdlWindow, width, height);
+}
 
 } /* namespace Client */
