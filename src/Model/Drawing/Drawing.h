@@ -11,6 +11,7 @@
 #include <deque>
 #include <osg/Node>
 #include <osg/Group>
+#include <typeinfo>
 
 namespace Model {
 namespace Drawing {
@@ -31,11 +32,26 @@ public:
 	virtual ~Drawing();
 	osg::Group* osggroup;
 	Element* addElement(Element* element); // Adds element to drawing, returns pointer to element
-	void update(uint depth, uint resolution); // Update all Elements in Drawing
+	void setUpdateProperties(uint depth, uint resolution);
+	void updateAll(uint depth, uint resolution); // setUpdateProperties and updateAll combined
+	void updateAll();
+	void updateAllNoArgs();
+	void updateElement(Element* element); // Update a specific element, handling recursion where needed
+	void debugPrintStructure();
 	std::string name;
-private:
+	uint updatedepth;
+	uint updateresolution;
 	std::deque<Element*> elements;
+private:
+	void fixNodeMembership(Element* element);
+	void resetUpdates(); // Set all elements to updated=false
+	void updateElementInternal(Element* element, uint depth, bool bidirec);
 };
+
+/*template <typename Type>
+Type* addElementReturnSame(Drawing* drawing, Type* element);*/
+
+//#define DRAWING_ADD_ELEMENT_PRESERVE_TYPE(element)
 
 } /* namespace Drawing */
 } /* namespace Model */
