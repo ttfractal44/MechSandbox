@@ -10,6 +10,7 @@
 #include "Model/Drawing/CopySequence.h"
 #include "Client/Client.h"
 #include "Editor/Editor.h"
+#include "Editor/mathutil.h"
 
 Client::Client* client;
 //Client::GraphicsWindow* graphics;
@@ -19,10 +20,15 @@ Model::Drawing::Element* union1;
 Model::Drawing::Union* union2;
 
 int main() {
+
+	/*printfraction(floatToPower2Fraction(1.25));
+	printfraction(floatToPower2Fraction(2.0625));
+	printfraction(floatToPower2Fraction(0.8125));
+	printfraction(floatToPower2Fraction(0.3495, 100000));*/
+
 	client = new Client::Client();
 	client->initializeGraphics();
 	//graphics = client->newGraphicsWindow("Graphics", 800, 600);
-	client->newGraphicsWindow("Graphics", 80, 60);
 	drawing1 = new Model::Drawing::Drawing("drawing1");
 
 	/*union1 = drawing1->addElement(new Model::Drawing::Union());
@@ -37,7 +43,7 @@ int main() {
 		}
 	}*/
 
-	union2 = new Model::Drawing::Union();
+	/*union2 = new Model::Drawing::Union();
 
 	drawing1->addElement(union2);
 
@@ -56,14 +62,19 @@ int main() {
 
 	//sequence1->setTransformationProperties(60, osg::Vec2(0,0),M_PI/30.0,osg::Vec2(0,0));
 	sequence1->setTransformationProperties(10, osg::Vec2(0.2,0),0.0,osg::Vec2(0,0));
-	sequence2->setTransformationProperties(10, osg::Vec2(0,0.2),0.0,osg::Vec2(0,0));
+	sequence2->setTransformationProperties(10, osg::Vec2(0,0.2),0.0,osg::Vec2(0,0));*/
 
+	for (float n=-1; n<1; n+=0.01) {
+		//drawing1->addElement(new Model::Drawing::Line(osg::Vec2(-2,n),osg::Vec2(2,n)));
+	}
 
 	//union2->addElement(union2);
 
 	//graphics->setSceneData(sequence2->osgnode);
 
-	drawing1->update(1000000,100);
+	//drawing1->update(1000000,100);
+
+	//drawing1->updateAll();
 
 	//sequence1->setTransformationProperties(5, osg::Vec2(0.5,0),M_PI/3,osg::Vec2(0,0));
 
