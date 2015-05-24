@@ -1,14 +1,10 @@
 src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
  ../src/Editor/../Model/Drawing/Drawing.h \
  ../src/Editor/../Model/Drawing/Element.h \
- ../src/Editor/../Model/Drawing/Drawing.h \
- ../src/Editor/../Client/GraphicsWindow.h \
- ../src/Editor/../Client/Client.h \
- ../src/Editor/../Client/../misc/config.h \
- ../src/Editor/../Client/../misc/utils.h /usr/include/gtk-3.0/gtk/gtk.h \
- /usr/include/gtk-3.0/gdk/gdk.h /usr/include/gtk-3.0/gdk/gdkconfig.h \
- /usr/include/glib-2.0/glib.h /usr/include/glib-2.0/glib/galloca.h \
- /usr/include/glib-2.0/glib/gtypes.h \
+ ../src/Editor/../Model/Drawing/../../misc/utils.h \
+ /usr/include/gtk-3.0/gtk/gtk.h /usr/include/gtk-3.0/gdk/gdk.h \
+ /usr/include/gtk-3.0/gdk/gdkconfig.h /usr/include/glib-2.0/glib.h \
+ /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
  /usr/include/glib-2.0/glib/gversionmacros.h \
@@ -533,15 +529,29 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- ../src/Editor/../Client/../misc/../misc/strings.h \
+ ../src/Editor/../Model/Drawing/../../misc/../misc/strings.h \
+ ../src/Editor/../Model/Drawing/UpdateElement.h \
+ ../src/Editor/../Model/Drawing/Drawing.h \
+ ../src/Editor/../Client/GraphicsWindow.h \
+ ../src/Editor/../Client/Client.h \
+ ../src/Editor/../Client/../misc/config.h \
+ ../src/Editor/../Client/../misc/utils.h \
  ../src/Editor/../Client/libraries.h \
  ../src/Editor/../Client/GraphicsWindow.h \
  ../src/Editor/../Client/GraphicsAttachedToolWindow.h \
  ../src/Editor/../Client/ToolWindow.h \
+ ../src/Editor/../Client/../misc/UCallback.h \
  ../src/Editor/../Client/ToolWindow.h \
  ../src/Editor/../Client/GraphicsAttachedToolWindow.h \
  ../src/Editor/../Client/Client.h ../src/Editor/../misc/config.h \
- ../src/Editor/../misc/utils.h ../src/Editor/../misc/UCallback.h
+ ../src/Editor/../misc/utils.h ../src/Editor/../misc/UCallback.h \
+ ../src/Editor/../Model/Drawing/Point.h \
+ ../src/Editor/../Model/Drawing/Line.h \
+ ../src/Editor/../Model/Drawing/Curve.h \
+ ../src/Editor/../Model/Drawing/Point.h \
+ ../src/Editor/../Model/Drawing/Circle.h \
+ ../src/Editor/../Model/Drawing/Union.h \
+ ../src/Editor/../Model/Drawing/CopySequence.h ../src/Editor/mathutil.h
 
 ../src/Editor/Editor.h:
 
@@ -549,15 +559,7 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
 
 ../src/Editor/../Model/Drawing/Element.h:
 
-../src/Editor/../Model/Drawing/Drawing.h:
-
-../src/Editor/../Client/GraphicsWindow.h:
-
-../src/Editor/../Client/Client.h:
-
-../src/Editor/../Client/../misc/config.h:
-
-../src/Editor/../Client/../misc/utils.h:
+../src/Editor/../Model/Drawing/../../misc/utils.h:
 
 /usr/include/gtk-3.0/gtk/gtk.h:
 
@@ -1687,7 +1689,19 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
 
 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 
-../src/Editor/../Client/../misc/../misc/strings.h:
+../src/Editor/../Model/Drawing/../../misc/../misc/strings.h:
+
+../src/Editor/../Model/Drawing/UpdateElement.h:
+
+../src/Editor/../Model/Drawing/Drawing.h:
+
+../src/Editor/../Client/GraphicsWindow.h:
+
+../src/Editor/../Client/Client.h:
+
+../src/Editor/../Client/../misc/config.h:
+
+../src/Editor/../Client/../misc/utils.h:
 
 ../src/Editor/../Client/libraries.h:
 
@@ -1696,6 +1710,8 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
 ../src/Editor/../Client/GraphicsAttachedToolWindow.h:
 
 ../src/Editor/../Client/ToolWindow.h:
+
+../src/Editor/../Client/../misc/UCallback.h:
 
 ../src/Editor/../Client/ToolWindow.h:
 
@@ -1708,3 +1724,19 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
 ../src/Editor/../misc/utils.h:
 
 ../src/Editor/../misc/UCallback.h:
+
+../src/Editor/../Model/Drawing/Point.h:
+
+../src/Editor/../Model/Drawing/Line.h:
+
+../src/Editor/../Model/Drawing/Curve.h:
+
+../src/Editor/../Model/Drawing/Point.h:
+
+../src/Editor/../Model/Drawing/Circle.h:
+
+../src/Editor/../Model/Drawing/Union.h:
+
+../src/Editor/../Model/Drawing/CopySequence.h:
+
+../src/Editor/mathutil.h:

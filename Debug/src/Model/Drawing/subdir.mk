@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/Model/Drawing/Attribute.cpp \
 ../src/Model/Drawing/Circle.cpp \
 ../src/Model/Drawing/CopySequence.cpp \
 ../src/Model/Drawing/Curve.cpp \
@@ -11,9 +12,11 @@ CPP_SRCS += \
 ../src/Model/Drawing/Element.cpp \
 ../src/Model/Drawing/Line.cpp \
 ../src/Model/Drawing/Point.cpp \
-../src/Model/Drawing/Union.cpp 
+../src/Model/Drawing/Union.cpp \
+../src/Model/Drawing/UpdateElement.cpp 
 
 OBJS += \
+./src/Model/Drawing/Attribute.o \
 ./src/Model/Drawing/Circle.o \
 ./src/Model/Drawing/CopySequence.o \
 ./src/Model/Drawing/Curve.o \
@@ -21,9 +24,11 @@ OBJS += \
 ./src/Model/Drawing/Element.o \
 ./src/Model/Drawing/Line.o \
 ./src/Model/Drawing/Point.o \
-./src/Model/Drawing/Union.o 
+./src/Model/Drawing/Union.o \
+./src/Model/Drawing/UpdateElement.o 
 
 CPP_DEPS += \
+./src/Model/Drawing/Attribute.d \
 ./src/Model/Drawing/Circle.d \
 ./src/Model/Drawing/CopySequence.d \
 ./src/Model/Drawing/Curve.d \
@@ -31,7 +36,8 @@ CPP_DEPS += \
 ./src/Model/Drawing/Element.d \
 ./src/Model/Drawing/Line.d \
 ./src/Model/Drawing/Point.d \
-./src/Model/Drawing/Union.d 
+./src/Model/Drawing/Union.d \
+./src/Model/Drawing/UpdateElement.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
