@@ -13,12 +13,19 @@
 #include <gtk/gtk.h>
 #include <string>
 #include <vector>
+#include <deque>
+#include <algorithm>
 
 //Project includes
 #include "../misc/strings.h"
 
 // Exports
 std::string readResource(std::string path);
+
+// Macros
+
+#define STL_CONTAINS(container, value) \
+	(std::find(container.begin(), container.end(), value)!=container.end())
 
 // Implementations (cannot separate Delcaration and Implementation for functions using templates)
 
