@@ -23,26 +23,58 @@ Element::Element() {
 	osgnode->asGroup()->addChild(osggeode);
 	updated = false;
 	modifiedSinceUpdate = true;
+	instanceclassname = "generic";
 }
 
 Element::~Element() {
 	// TODO Auto-generated destructor stub
 }
 
-void Element::update(uint depth, uint resolution) {
-	if (!updated && modifiedSinceUpdate && depth>0) {
-		updateImpl(depth-1, resolution);
+/*void Element::update() {
+	update(container->lastdepth, container->lastresolution);
+}*/
+
+/*void Element::update() {
+	if (!updated && modifiedSinceUpdate) {
+		updateImpl(container->updateresolution);
 		updated=true;
 		modifiedSinceUpdate = false;
 	}
-}
+	for (uint i=0; i<updateDependentElements.size(); i++) {
+		Element* element = updateDependentElements.at(i);
+		element->update();
+	}
+}*/
 
-void Element::modified() {
+/*void Element::modified() {
 	modifiedSinceUpdate = true;
+	updated=false;
+}*/
+
+void Element::updateImpl(uint resolution) {
+
 }
 
-void Element::updateImpl(uint depth, uint resolution) {
+std::string Element::printAttributes() {
+	return std::string("generic");
+}
 
+std::string Element::getClassName() {
+	return instanceclassname;
+}
+
+void Element::dependOn(Element* element) {
+	printf("Establishing a dependency\n");
+	if (STL_CONTAINS(updateFirstElements, element)) {
+		printf("Element dependency already established! (updateFirstElements contains target)\n");
+	} else {
+		updateFirstElements.push_back(element);
+	}
+	if (STL_CONTAINS(element->updateAfterElements, element)) {
+		printf("Element dependency already established! (target's updateAfterElements contains this)\n");
+	} else {
+		element->updateAfterElements.push_back(this);
+	}
 }
 
 } /* namespace Drawing */
