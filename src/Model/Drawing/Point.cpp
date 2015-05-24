@@ -16,13 +16,14 @@ Point::Point(osg::Vec2 _pos) {
 	drawelements->setMode(osg::DrawElements::PrimitiveSet::POINTS);
 	//osggeom->setUseDisplayList (false);
 	//osggeom->setUseVertexBufferObjects(true);
+	instanceclassname = "Point";
 }
 
 Point::~Point() {
 	// TODO Auto-generated destructor stub
 }
 
-void Point::updateImpl(uint depth, uint resolution) {
+void Point::updateImpl(uint resolution) {
 	verts->clear();
 	verts->push_back(pos);
 	drawelements->clear();

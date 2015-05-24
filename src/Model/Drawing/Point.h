@@ -18,7 +18,7 @@ public:
 	Point(osg::Vec2 _pos);
 	virtual ~Point();
 	osg::Vec2 pos;
-	void updateImpl(uint depth, uint resoluton);
+	void updateImpl(uint resoluton);
 };
 
 } /* namespace Drawing */

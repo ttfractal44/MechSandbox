@@ -12,6 +12,7 @@ namespace Drawing {
 
 Union::Union() {
 	// TODO Auto-generated constructor stub
+	instanceclassname = "Point";
 }
 
 Union::~Union() {

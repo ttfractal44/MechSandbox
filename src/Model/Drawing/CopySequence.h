@@ -21,7 +21,7 @@ public:
 	virtual ~CopySequence();
 	//void setElement(Element* _element); // Should this be allowed?
 	void setTransformationProperties(uint _copyTimes, osg::Vec2 _translationVector, float _rotationRadians, osg::Vec2 _rotationCenter);
-	void updateImpl(uint depth, uint resoluton);
+	void updateImpl(uint resoluton);
 protected:
 	Element* element;
 	std::deque<osg::MatrixTransform*> osgtransforms;

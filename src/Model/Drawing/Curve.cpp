@@ -12,7 +12,7 @@ namespace Drawing {
 
 Curve::Curve() {
 	// TODO Auto-generated constructor stub
-
+	instanceclassname = "Curve";
 }
 
 Curve::~Curve() {

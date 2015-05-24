@@ -14,14 +14,14 @@ Circle::Circle(osg::Vec2 _center, float _radius) {
 	center = _center;
 	radius = _radius;
 	drawelements->setMode(osg::PrimitiveSet::LINE_LOOP);
-
+	instanceclassname = "Circle";
 }
 
 Circle::~Circle() {
 	// TODO Auto-generated destructor stub
 }
 
-void Circle::updateImpl(uint depth, uint resolution) {
+void Circle::updateImpl(uint resolution) {
 	verts->clear();
 	drawelements->clear();
 	for (uint i=0; i<resolution; i++) {

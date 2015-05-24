@@ -19,7 +19,7 @@ public:
 	virtual ~Circle();
 	osg::Vec2 center;
 	float radius;
-	void updateImpl(uint depth, uint resoluton);
+	void updateImpl(uint resoluton);
 };
 
 } /* namespace Drawing */

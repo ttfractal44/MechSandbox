@@ -17,6 +17,7 @@ CopySequence::CopySequence(Element* _element) {
 	translationVector = osg::Vec2(0,0);
 	rotationRadians = 0;
 	rotationCenter = osg::Vec2(0,0);
+	instanceclassname = "CopySequence";
 }
 
 CopySequence::~CopySequence() {
@@ -30,9 +31,10 @@ void CopySequence::setTransformationProperties(uint _copyTimes, osg::Vec2 _trans
 	rotationCenter = _rotationCenter;
 }
 
-void CopySequence::updateImpl(uint depth, uint resoluton) {
-	uint times = std::min(copyTimes, depth); // TODO Potentially I should not be using depth this way (depth is intended for levels of recursion while this is iterative, not recursive)
+void CopySequence::updateImpl(uint resoluton) {
+	//uint times = std::min(copyTimes, depth); // TODO Potentially I should not be using depth this way (depth is intended for levels of recursion while this is iterative, not recursive)
 	//printf("Container is %d while should be %d\n",osgtransforms.size(),times);
+	uint times = copyTimes;
 	if (osgtransforms.size()<times) { // Need to create new osgtransforms
 		for (uint i=osgtransforms.size(); i<times; i++) {
 			osg::MatrixTransform* osgtransform = new osg::MatrixTransform();
