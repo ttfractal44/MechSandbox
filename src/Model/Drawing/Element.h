@@ -37,23 +37,27 @@ class Element : public UpdateElement { // Base class for all Drawing elements.  
 public:
 	Element();
 	virtual ~Element();
-	osg::Group* osgnode;
-	osg::Geode* osggeode;
+	osg::ref_ptr<osg::Group> osgnode;
+	osg::ref_ptr<osg::Geode> osggeode;
 	//void update(); // Update using depth and resolution settings for Drawing
 	//void update(uint depth, uint resolution); // Update this Element and any that this Element depends on
 	void update();
 	void modified();
 	std::string getClassName();
+	std::string getName();
+	std::string getDescription();
+	void setName(std::string name);
+	virtual std::string printAttributes();
 	void dependOn(Element* element); // Mark this element as having an update dependency on another element
+	void unDependOn(Element* element);
 protected:
 	virtual void updateImpl(uint resolution); // Update code added by subclass
-	virtual std::string printAttributes();
 	bool updated;
 	bool modifiedSinceUpdate;
 	Drawing* container;
-	osg::Geometry* osggeom;
-	osg::Vec2Array* verts;
-	osg::DrawElementsUInt* drawelements;
+	osg::ref_ptr<osg::Geometry> osggeom;
+	//osg::ref_ptr<osg::Vec2Array> verts;
+	//osg::ref_ptr<osg::DrawElementsUInt> drawelements;
 	//std::deque<Element*> updateDependentElements;
 	/*
 	 * UpdateFirst: these elements must be updated first
@@ -62,6 +66,7 @@ protected:
 	std::deque<Element*> updateFirstElements;
 	std::deque<Element*> updateAfterElements;
 	std::string instanceclassname;
+	std::string name;
 };
 
 template <typename ElementSubclass>
@@ -72,7 +77,6 @@ inline ElementSubclass* castElement(std::string name, Element* element) {
 
 #define Model_Drawing_ELEMENT_CAST(ElementSubclass, element) \
 	Model::Drawing::castElement<ElementSubclass>(std::string(#ElementSubclass), element);
-
 
 } /* namespace Drawing */
 } /* namespace Model */
