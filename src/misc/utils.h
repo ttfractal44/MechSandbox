@@ -21,11 +21,34 @@
 
 // Exports
 std::string readResource(std::string path);
+void printAddress(void* pointer);
+void print3Addresses(void* pointer1, void* pointer2, void* pointer3);
+std::string stringprintf(const char * format, ...);
+bool trimTrailingNewlines(std::string* string, bool trimspaces=false); // Returns true if a trimming was performed
+std::string trimTrailingNewlines(std::string string, bool trimspaces=false);
+template <typename type>
+void dequeRemoveAll(std::deque<type>* deque, type value) {
+	deque->erase(std::remove(deque->begin(), deque->end(), value), deque->end());
+}
+inline int sign(float n) {
+	return (n > 0) - (n < 0);
+}
+
+template <typename type>
+struct PtrWrap {
+	type* p;
+};
+
 
 // Macros
 
 #define STL_CONTAINS(container, value) \
 	(std::find(container.begin(), container.end(), value)!=container.end())
+
+// Constants
+
+const bool u_true = true;
+const bool u_false = false;
 
 // Implementations (cannot separate Delcaration and Implementation for functions using templates)
 
