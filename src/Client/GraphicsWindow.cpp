@@ -27,7 +27,8 @@ GraphicsWindow::GraphicsWindow(Client* _client, std::string newWindowTitle, int 
 	//focusChangingTimer = 0;
 	focused=false;
 	eventHandler=NULL;
-	keystateHandler=NULL;
+	//keystateHandler=NULL;
+	idleFunc=NULL;
 	mouseFollowWidget=NULL;
 	mouseFollowWindow=NULL;
 }
@@ -96,7 +97,20 @@ GraphicsAttachedToolWindow* GraphicsWindow::newAttachedToolWindow(std::string ne
 }
 
 void GraphicsWindow::setMouseFollowWidget(GtkWidget* widget) {
-	mouseFollowWindow = widget;
+	gtk_container_remove(GTK_CONTAINER(mouseFollowWindow), mouseFollowWidget);
+	mouseFollowWidget = widget;
+	gtk_container_add(GTK_CONTAINER(mouseFollowWindow), mouseFollowWidget);
+	gtk_widget_show(mouseFollowWidget);
+}
+
+bool GraphicsWindow::mouseFollowWindowEnterNotifyCallback(GtkWidget* widget) {
+	gtk_window_set_keep_above(GTK_WINDOW(widget), false);
+	//gtk_widget_hide(widget);
+	return false;
+}
+bool GraphicsWindow::mouseFollowWindowLeaveNotifyCallback(GtkWidget* widget) {
+	//gtk_window_set_keep_above(GTK_WINDOW(widget), true);
+	return false;
 }
 
 void GraphicsWindow::showMouseFollowWidget() {
@@ -110,14 +124,16 @@ void GraphicsWindow::showMouseFollowWidget() {
 		gtk_window_set_keep_above(GTK_WINDOW(mouseFollowWindow), true);
 		//gtk_widget_set_opacity(mouseFollowWindow, 0.5);
 		gtk_widget_set_visual(mouseFollowWindow, gdk_screen_get_rgba_visual(gdk_screen_get_default()));
-		GdkRGBA color = {0,0,0,0};
-		gtk_widget_override_background_color(mouseFollowWindow, GTK_STATE_FLAG_NORMAL, &color);
+		gtk_widget_override_background_color(mouseFollowWindow, GTK_STATE_FLAG_NORMAL, new GdkRGBA{0.2,0.2,0.2,0.5});
+		gtk_widget_override_color(mouseFollowWindow, GTK_STATE_FLAG_NORMAL, new GdkRGBA{1,1,1,1});
 		gtk_window_resize(GTK_WINDOW(mouseFollowWindow),128,32);
 		//gtk_window_move(GTK_WINDOW(mouseFollowWindow),960,540);
+		gtk_container_add(GTK_CONTAINER(mouseFollowWindow), mouseFollowWidget);
 		gtk_widget_show_all(mouseFollowWindow);
-		//g_signal_connect(mouseFollowWindow, "enter-notify-event", G_CALLBACK(gtk_widget_hide), NULL);
-		//g_signal_connect(mouseFollowWindow, "leave-notify-event", G_CALLBACK(gtk_widget_show), NULL);
-		//gtk_container_add(GTK_CONTAINER(mouseFollowWindow), mouseFollowWidget);
+		//UCallback* callback = UCLASSCALLBACK_SWAPPED(this, &GraphicsWindow::mouseFollowWindowEnterNotifyCallback, mouseFollowWindow);
+		g_signal_connect(mouseFollowWindow, "enter-notify-event", G_CALLBACK(ucallback_call_2), UCLASSCALLBACK(this, &GraphicsWindow::mouseFollowWindowEnterNotifyCallback, NULL) );
+		g_signal_connect(mouseFollowWindow, "leave-notify-event", G_CALLBACK(ucallback_call_2), UCLASSCALLBACK(this, &GraphicsWindow::mouseFollowWindowLeaveNotifyCallback, NULL) );
+
 	}
 }
 
@@ -146,6 +162,7 @@ void GraphicsWindow::handleEvent(SDL_Event event) {
 		break;
 	case (SDL_MOUSEMOTION):
 		if (mouseFollowWindow) {
+			gtk_window_set_keep_above(GTK_WINDOW(mouseFollowWindow), true);
 			gtk_window_move(GTK_WINDOW(mouseFollowWindow),lastWindowX+event.motion.x+32,lastWindowY+event.motion.y+48);
 		}
 		break;
@@ -206,10 +223,14 @@ void GraphicsWindow::iteration() {
 	//if (focusChangingTimer>0) { focusChangingTimer-=1; }
 	SDL_GL_MakeCurrent(sdlWindow, sdlglContext);
 
-	if (focused && keystateHandler) {
+	/*if (focused && keystateHandler) {
 		const Uint8* keystate = SDL_GetKeyboardState(NULL);
 		//callback_call(&keystate, keystateHandler);
 		keystateHandler->call(&keystate);
+	}*/
+
+	if (idleFunc) {
+		idleFunc->call(NULL);
 	}
 
 	osg_viewer->frame();
@@ -220,8 +241,12 @@ void GraphicsWindow::setEventHandler(UCallback* _eventHandler) {
 	eventHandler = _eventHandler;
 }
 
-void GraphicsWindow::setKeystateHandler(UCallback* _keystateHandler) {
+/*void GraphicsWindow::setKeystateHandler(UCallback* _keystateHandler) {
 	keystateHandler = _keystateHandler;
+}*/
+
+void GraphicsWindow::setIdleFunction(UCallback* _idleFunc) {
+	idleFunc = _idleFunc;
 }
 
 void GraphicsWindow::getSize(int* width, int* height) {

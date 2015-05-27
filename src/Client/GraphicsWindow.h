@@ -13,6 +13,7 @@
 #include "GraphicsAttachedToolWindow.h"
 
 #include "../misc/UCallback.h"
+#include "../misc/utils.h"
 
 namespace Client {
 
@@ -33,15 +34,19 @@ public:
 	void handleEvent(SDL_Event event);
 	GraphicsAttachedToolWindow* newAttachedToolWindow(std::string newWindowTitle);
 	void setMouseFollowWidget(GtkWidget* widget);
+	bool mouseFollowWindowEnterNotifyCallback(GtkWidget* widget);
+	bool mouseFollowWindowLeaveNotifyCallback(GtkWidget* widget);
 	void showMouseFollowWidget();
 	void hideMouseFollowWidget();
 	void setEventHandler(UCallback* _eventHandler);
-	void setKeystateHandler(UCallback* _keystateHandler);
+	//void setKeystateHandler(UCallback* _keystateHandler);
+	void setIdleFunction(UCallback* _idleFunc);
 	void getSize(int* width, int* height);
+	GtkWidget* mouseFollowWindow;
 private:
 	Client* client;
 	std::vector<GraphicsAttachedToolWindow*> attachedToolWindows;
-	GtkWidget* mouseFollowWindow;
+
 	GtkWidget* mouseFollowWidget;
 	SDL_Window* sdlWindow;
 	SDL_GLContext sdlglContext;
@@ -60,7 +65,7 @@ private:
 	//void* secondLastFocused; // Do not dereference!
 	uint focusCount=0;
 	UCallback* eventHandler;
-	UCallback* keystateHandler;
+	UCallback* idleFunc;
 	bool focused;
 };
 
