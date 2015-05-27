@@ -20,6 +20,8 @@ public:
 	virtual ~Line();
 	Point* point1;
 	Point* point2;
+	void changePoint1(Point* newpoint1);
+	void changePoint2(Point* newpoint2);
 	void updateImpl(uint resoluton);
 	std::string printAttributes();
 };
