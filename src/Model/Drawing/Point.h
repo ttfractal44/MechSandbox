@@ -15,10 +15,12 @@ namespace Drawing {
 
 class Point: public Element {
 public:
+	Point();
 	Point(osg::Vec2 _pos);
 	virtual ~Point();
 	osg::Vec2 pos;
 	void updateImpl(uint resoluton);
+	std::string printAttributes();
 };
 
 } /* namespace Drawing */
