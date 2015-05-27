@@ -10,12 +10,14 @@
 
 
 UCallback::UCallback( void* (*_function)(void*, void*) , void* _userdataP , bool _swapped, bool _returns ) {
+	safetyPtr = this;
 	function = _function;
 	userdataP = _userdataP;
 	swapped = _swapped;
 	returns = _returns;
 	classmode = false;
 	templateclasscallback_destroyfunction = NULL;
+	sprintf(text, "real data here...");
 }
 
 UCallback::~UCallback() {
@@ -27,19 +29,33 @@ UCallback::~UCallback() {
 }
 
 void* UCallback::call(void* callerdataP) {
-	if (!swapped) { // NOT swapped
-		return function(callerdataP, userdataP);
-	} else { // SWAPPED
-		return function(userdataP, callerdataP);
-	}
+	/*if (classmode) {
+		UClassCallback<Bogus>* callbackP = (UClassCallback<Bogus>*)callerdataP;
+		UClassCallback<Bogus> callback = *callbackP;
+	}*/
+	//if (!classmode) {
+		if (!swapped) { // NOT swapped
+			return function(callerdataP, userdataP);
+		} else { // SWAPPED
+			return function(userdataP, callerdataP);
+		}
+	/*} else {
+		printf("Something terrible is happening.  This probably stopped a segfault from happening.\n");
+		//return ((UClassCallback<Bogus>*)this)->call(callerdataP);
+		return NULL;
+	}*/
 }
 
 void* ucallback_call(void* callerdataP, UCallback* callback) {
-	if (callback) {
+	if (callback && callback==callback->safetyPtr) {
 		return callback->call(callerdataP);
 	} else {
-		printf("ucallback_call called for nonexistent UCallback %p!  Returning a NULL pointer.\n",callback);
+		printf("ucallback_call called for nonexistent or bogus UCallback %p!  Returning a NULL pointer.\n",callback);
 		return NULL;
 	}
+}
+
+void* ucallback_call_2(void* callerdataP, void* data2, UCallback* callback) {
+	return ucallback_call(callerdataP, callback);
 }
 
