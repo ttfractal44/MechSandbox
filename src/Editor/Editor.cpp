@@ -14,7 +14,6 @@ Editor::Editor(Client::Client* _client, Model::Drawing::Drawing* _drawing) {
 	drawing = _drawing;
 	windowname = drawing->name;
 	graphics = client->newGraphicsWindow(windowname, config::defaultWindowWidth, config::defaultWindowHeight);
-	graphics->showMouseFollowWidget();
 	osg::Camera* camera = graphics->getCamera();
 	camera->setViewMatrixAsLookAt(osg::Vec3(0,0,4),osg::Vec3(0,0,0),osg::Vec3(0,1,0));
 	osggroup = new osg::Group();
@@ -23,7 +22,9 @@ Editor::Editor(Client::Client* _client, Model::Drawing::Drawing* _drawing) {
 	osggroup->addChild(visualization);
 	graphics->setSceneData(osggroup);
 
-
+	mouseWidget = gtk_label_new("_");
+	graphics->showMouseFollowWidget();
+	graphics->setMouseFollowWidget(mouseWidget);
 
 	cursor = new osg::Geode();
 	osg::ref_ptr<osg::Geometry> cursorgeometry = new osg::Geometry();
@@ -76,7 +77,8 @@ Editor::Editor(Client::Client* _client, Model::Drawing::Drawing* _drawing) {
 	osggroup->addChild(cursorTransform);
 
 	graphics->setEventHandler(UCLASSCALLBACK_VOID(this, &Editor::Editor::handleGraphicsWindowEvent, NULL));
-	graphics->setKeystateHandler(UCLASSCALLBACK_VOID(this, &Editor::Editor::handleGraphicsWindowKeystate, NULL));
+	//graphics->setKeystateHandler(UCLASSCALLBACK_VOID(this, &Editor::Editor::handleGraphicsWindowKeystate, NULL));
+	graphics->setIdleFunction(UCLASSCALLBACK_VOID(this, &Editor::Editor::iteration, NULL));
 
 	//createCmdLineWindow();
 
@@ -99,6 +101,7 @@ void Editor::createTools() {
 		return;
 	}
 	tools.push_back(newTool("select", "Select"));
+	tools.push_back(newTool("delete", "Delete"));
 	tools.push_back(newTool("point", "Point"));
 	tools.push_back(newTool("line", "Line"));
 	tools.push_back(newTool("circle", "Circle"));
@@ -247,109 +250,224 @@ osg::Vec2 Editor::getDrawingCoordinatesFromPixel(int px, int py) {
 }
 
 void Editor::setCursorPosition(osg::Vec2 pos) {
+	curpos = pos;
 	osg::Matrixd cursorTransformMatrix;
 	cursorTransformMatrix *= osg::Matrix::scale(cursorScale, cursorScale, cursorScale);
 	cursorTransformMatrix *= osg::Matrix::translate(osg::Vec3(pos._v[0],pos._v[1],0));
 	cursorTransform->setMatrix(cursorTransformMatrix);
 }
 
+
+
+std::deque<Model::Drawing::Point*> Editor::findPointsNear(osg::Vec2 pos) {
+	std::deque<Model::Drawing::Point*> points;
+	for (uint i=0; i<drawing->elements.size(); i++) {
+		Model::Drawing::Element* element = drawing->elements.at(i);
+		//printf("%s\n",element->getClassName().c_str());
+		if (element->getClassName()=="Point") {
+			Model::Drawing::Point* point = (Model::Drawing::Point*)element;
+			if (Vec2Distance(point->pos,pos)<snapRadius) {
+				points.push_back(point);
+			}
+		}
+	}
+	return points;
+}
+
+std::deque<Model::Drawing::Point*> Editor::findPointsNear(osg::Vec2 pos, std::deque<Model::Drawing::Point*> excludepoints) {
+	std::deque<Model::Drawing::Point*> points;
+	for (uint i=0; i<drawing->elements.size(); i++) {
+		Model::Drawing::Element* element = drawing->elements.at(i);
+		//printf("%s\n",element->getClassName().c_str());
+		if (element->getClassName()=="Point" && !STL_CONTAINS(excludepoints, element)) {
+			Model::Drawing::Point* point = (Model::Drawing::Point*)element;
+			if (Vec2Distance(point->pos,pos)<snapRadius) {
+				points.push_back(point);
+			}
+		}
+	}
+	return points;
+}
+
+void Editor::selectElementUpdate() {
+	/*int rank_Point = 0;
+	int rank_Midpoint = 0;
+	int rank_Line = -100;*/
+	std::deque<Model::Drawing::Element*> elements;
+	for (uint i=0; i<drawing->elements.size(); i++) {
+		Model::Drawing::Element* element = drawing->elements.at(i);
+		//printf("%s\n",element->getClassName().c_str());
+		if (!STL_CONTAINS(selectElementRestrictions, element->getClassName()) && !STL_CONTAINS(selectElementExclusions, element)) {
+			if (element->getClassName()=="Point") {
+				if (((Model::Drawing::Point*)element)!=curpointP && Vec2Distance(((Model::Drawing::Point*)element)->pos,curpos)<snapRadius) {
+					elements.push_back(element);
+				}
+			}
+		}
+	}
+	if (elements.size()>0) {
+		selectElement = elements.at((selectElementSelector % elements.size()));
+	} else  {
+		selectElement = NULL;
+	}
+	selectElementsList = elements;
+
+	// GUI feedback
+	std::string elementsList;
+	for (uint i=0; i<selectElementsList.size(); i++) {
+		Model::Drawing::Element* element = selectElementsList.at(i);
+		if (element==selectElement) {
+			elementsList += " <span color=\"#0F0\">"+element->getDescription()+"</span> \n";
+		} else {
+			elementsList += " "+element->getDescription()+" \n";
+		}
+	}
+	gtk_label_set_markup(GTK_LABEL(mouseWidget), trimTrailingNewlines(stringprintf(" ( %f , %f ) \n%s",curpos._v[0],curpos._v[1],elementsList.c_str())).c_str());
+	gtk_window_resize(GTK_WINDOW(graphics->mouseFollowWindow), 1, 1);
+}
+void Editor::selectElementRestrict(std::deque<std::string> list) {
+	selectElementRestrictions = list;
+}
+void Editor::selectElementUnRestrict() {
+	selectElementRestrictions.clear();
+}
+void Editor::selectElementExclude(std::deque<Model::Drawing::Element*> elements) {
+	selectElementExclusions = elements;
+}
+
 void Editor::handleGraphicsWindowEvent(SDL_Event* event) {
 	osg::Vec2 pos;
 	const Uint8* keystate = SDL_GetKeyboardState(NULL);
 	switch (event->type) {
-	case (SDL_QUIT):
-		break;
-	case (SDL_KEYDOWN):
-		switch (event->key.keysym.sym) {
-		case (SDLK_ESCAPE):
-			printf("Escape!\n");
-			nowdrawing = false;
-			break;
-		case (SDLK_r):
-			printf("Updated drawing\n");
-			//drawing->update(1000000,100);
-			break;
-		}
-		break;
-	case (SDL_MOUSEBUTTONDOWN):
-		//printf("click at %d,%d in pixelspace\n",event->button.x, event->button.y);
-		pos = getDrawingCoordinatesFromPixel(event->button.x, event->button.y);
-		//setCursorPosition(pos);
-		/*if (!nowdrawing) {
-			pos1 = pos;
-			nowdrawing=true;
-		} else {
-			if (currentTool=="line") {
-				drawing->addElement(new Model::Drawing::Line(pos1, pos));
+		case (SDL_QUIT): {
+
+		} break;
+		case (SDL_KEYDOWN): {
+			switch (event->key.keysym.sym) {
+			case (SDLK_ESCAPE):
+				printf("Escape!\n");
+				nowdrawing = false;
+				break;
+			case (SDLK_r):
+				printf("Updated drawing\n");
+				//drawing->update(1000000,100);
+				break;
+				}
+		} break;
+		case (SDL_MOUSEBUTTONDOWN): {
+			//printf("click at %d,%d in pixelspace\n",event->button.x, event->button.y);
+			pos = getDrawingCoordinatesFromPixel(event->button.x, event->button.y);
+			//setCursorPosition(pos);
+			/*if (!nowdrawing) {
 				pos1 = pos;
-			}
-			if (currentTool=="circle") {
-				drawing->addElement(new Model::Drawing::Circle(pos1, Vec2Distance(pos1, pos)));
-				nowdrawing=false;
-			}
-		}*/
-		printf("%s\n", currentTool->name.c_str());
-		if (!nowdrawing) {
-			if (currentTool->name=="select") {
-				for (uint i=0; i<drawing->elements.size(); i++) {
-					Model::Drawing::Element* element = drawing->elements.at(i);
-					//printf("%s\n",element->getClassName().c_str());
-					if (element->getClassName()=="Point") {
-						Model::Drawing::Point* point = (Model::Drawing::Point*)element;
+				nowdrawing=true;
+			} else {
+				if (currentTool=="line") {
+					drawing->addElement(new Model::Drawing::Line(pos1, pos));
+					pos1 = pos;
+				}
+				if (currentTool=="circle") {
+					drawing->addElement(new Model::Drawing::Circle(pos1, Vec2Distance(pos1, pos)));
+					nowdrawing=false;
+				}
+			}*/
+			printf("%s\n", currentTool->name.c_str());
+			if (!nowdrawing) {
+				if (currentTool->name=="select") {
+					if (selectElement->getClassName()=="Point") {
+						Model::Drawing::Point* point = (Model::Drawing::Point*)selectElement;
 						if (Vec2Distance(point->pos,pos)<snapRadius) {
 							printf("Point %p clicked\n",point);
-							curposP = &point->pos;
+							curpointP = point;
 							currentDrawElement = point;
 							nowdrawing = true;
 						}
 					}
 				}
+				if (currentTool->name=="line") {
+					//std::deque<Model::Drawing::Point*> findpoints = findPointsNear(pos);
+					Model::Drawing::Point* newpoint1;
+					/*if (findpoints.size()==0) {
+						newpoint1 = (Model::Drawing::Point*)drawing->addElement(new Model::Drawing::Point(pos));
+					} else {
+						newpoint1 = findpoints.at(0);
+					}*/
+					if (selectElement && selectElement->getClassName()=="Point") {
+						newpoint1 = selectElement;
+					} else {
+						newpoint1 = (Model::Drawing::Point*)drawing->addElement(new Model::Drawing::Point(pos));
+					}
+					Model::Drawing::Point* newpoint2 = (Model::Drawing::Point*)drawing->addElement(new Model::Drawing::Point(pos));
+					//Model::Drawing::Line* newline = new Model::Drawing::Line(pos, osg::Vec2(0,0));
+					Model::Drawing::Line* newline = new Model::Drawing::Line(newpoint1, newpoint2);
+					drawing->addElement(newline);
+					//curposP = &newline->pos2;
+					curpointP = newpoint2;
+					currentDrawElement = newline;
+					nowdrawing = true;
+				}
+				if (currentTool->name=="delete") {
+					/*std::deque<Model::Drawing::Point*> findpoints = findPointsNear(pos);
+					if (findpoints.size()>0) {
+						drawing->deleteElement(findpoints.at(0));
+					}*/
+					if (selectElement) {
+						drawing->deleteElement(selectElement);
+					}
+				}
+			} else { // nowdrawing = true;
+				//std::deque<Model::Drawing::Point*> findpoints = findPointsNear(pos, std::deque<Model::Drawing::Point*>{curpointP});
+				//selectElementExclude(std::deque{curpointP});
+				if (selectElement && selectElement->getClassName()=="Point" && currentDrawElement->getClassName()=="Line") {
+					((Model::Drawing::Line*)currentDrawElement)->changePoint2(selectElement);
+					// The problem is that the Line deletes itself, but currentDrawElement still refers to where it used to be
+					drawing->updateElement(curpointP);
+					drawing->deleteElement(curpointP);
+				} else {
+					drawing->updateElement(currentDrawElement);
+					drawing->updateElement(curpointP);
+				}
+				curpointP = NULL;
+				currentDrawElement = NULL;
+				nowdrawing = false;
 			}
-			if (currentTool->name=="line") {
-				Model::Drawing::Point* newpoint1 = (Model::Drawing::Point*)drawing->addElement(new Model::Drawing::Point(pos));
-				Model::Drawing::Point* newpoint2 = (Model::Drawing::Point*)drawing->addElement(new Model::Drawing::Point(osg::Vec2(0,0)));
-				//Model::Drawing::Line* newline = new Model::Drawing::Line(pos, osg::Vec2(0,0));
-				Model::Drawing::Line* newline = new Model::Drawing::Line(newpoint1, newpoint2);
-				drawing->addElement(newline);
-				//curposP = &newline->pos2;
-				curposP = &newpoint2->pos;
-				currentDrawElement = newline;
-				nowdrawing = true;
-			}
-		} else {
-			curposP = NULL;
-			currentDrawElement = NULL;
-			nowdrawing = false;
-		}
 
-		//drawing->update(1000000,100);
-		//printf("click at %f,%f in windowspace\n",pos._v[0], pos._v[1]);
-		break;
-	case (SDL_MOUSEMOTION):
-		//printf("mouse moved to %d,%d in pixelspace\n",event->motion.x, event->motion.y);
-		pos = getDrawingCoordinatesFromPixel(event->button.x, event->button.y);
-		setCursorPosition(pos);
-		if (nowdrawing && curposP && currentDrawElement) {
-			*curposP = pos;
-			//currentDrawElement->modified();
-			//currentDrawElement->update();
+			drawing->updateAll();
+
 			//drawing->update(1000000,100);
-			drawing->updateElement(currentDrawElement);
-		}
-		//iteration();
-		break;
-	}
-}
-
-void Editor::handleGraphicsWindowKeystate(const Uint8** keystateP) {
-	const Uint8* keystate = *keystateP;
-	if (keystate[SDL_SCANCODE_W]) {
-		printf("onwards!\n");
+			//printf("click at %f,%f in windowspace\n",pos._v[0], pos._v[1]);
+		} break;
+		case (SDL_MOUSEMOTION): {
+			//printf("mouse moved to %d,%d in pixelspace\n",event->motion.x, event->motion.y);
+			pos = getDrawingCoordinatesFromPixel(event->button.x, event->button.y);
+			setCursorPosition(pos);
+			selectElementUpdate();
+			if (nowdrawing && curpointP && currentDrawElement) {
+				curpointP->pos = pos;
+				//currentDrawElement->modified();
+				//currentDrawElement->update();
+				//drawing->update(1000000,100);
+				drawing->updateElement(currentDrawElement);
+			}
+			//iteration();
+		} break;
+		case (SDL_MOUSEWHEEL): {
+			//if (event->wheel.y)
+			printf("Mouse scroll'd\n");
+			selectElementSelector += sign(event->wheel.y);
+			printf("Element selector now %d\n",selectElementSelector);
+			selectElementUpdate();
+		} break;
 	}
 }
 
 void Editor::iteration() {
-
+	//printf("i");
+	//drawing->updateAll();
+	const Uint8* keystate = SDL_GetKeyboardState(NULL);
+	if (keystate[SDL_SCANCODE_W]) {
+		printf("onwards!\n");
+	}
 }
 
 } /* namespace Editor */
