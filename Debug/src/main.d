@@ -537,13 +537,14 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
  ../src/Client/libraries.h ../src/Client/GraphicsWindow.h \
  ../src/Client/Client.h ../src/Client/GraphicsAttachedToolWindow.h \
  ../src/Client/ToolWindow.h ../src/Client/../misc/UCallback.h \
- ../src/Editor/Editor.h ../src/Editor/../Model/Drawing/Drawing.h \
+ ../src/Client/../misc/utils.h ../src/Editor/Editor.h \
+ ../src/Editor/../Model/Drawing/Drawing.h \
  ../src/Editor/../Client/GraphicsWindow.h \
  ../src/Editor/../Client/Client.h ../src/Editor/../Client/ToolWindow.h \
  ../src/Editor/../Client/GraphicsAttachedToolWindow.h \
  ../src/Editor/../Client/Client.h ../src/Editor/../misc/config.h \
  ../src/Editor/../misc/utils.h ../src/Editor/../misc/UCallback.h \
- ../src/Editor/../Model/Drawing/Point.h \
+ ../src/Editor/../misc/UPointer.h ../src/Editor/../Model/Drawing/Point.h \
  ../src/Editor/../Model/Drawing/Line.h \
  ../src/Editor/../Model/Drawing/Circle.h \
  ../src/Editor/../Model/Drawing/Union.h \
@@ -1722,6 +1723,8 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
 
 ../src/Client/../misc/UCallback.h:
 
+../src/Client/../misc/utils.h:
+
 ../src/Editor/Editor.h:
 
 ../src/Editor/../Model/Drawing/Drawing.h:
@@ -1741,6 +1744,8 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
 ../src/Editor/../misc/utils.h:
 
 ../src/Editor/../misc/UCallback.h:
+
+../src/Editor/../misc/UPointer.h:
 
 ../src/Editor/../Model/Drawing/Point.h:
 

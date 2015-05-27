@@ -11,6 +11,7 @@ CPP_SRCS += \
 ../src/Model/Drawing/Drawing.cpp \
 ../src/Model/Drawing/Element.cpp \
 ../src/Model/Drawing/Line.cpp \
+../src/Model/Drawing/Midpoint.cpp \
 ../src/Model/Drawing/Point.cpp \
 ../src/Model/Drawing/Union.cpp \
 ../src/Model/Drawing/UpdateElement.cpp 
@@ -23,6 +24,7 @@ OBJS += \
 ./src/Model/Drawing/Drawing.o \
 ./src/Model/Drawing/Element.o \
 ./src/Model/Drawing/Line.o \
+./src/Model/Drawing/Midpoint.o \
 ./src/Model/Drawing/Point.o \
 ./src/Model/Drawing/Union.o \
 ./src/Model/Drawing/UpdateElement.o 
@@ -35,6 +37,7 @@ CPP_DEPS += \
 ./src/Model/Drawing/Drawing.d \
 ./src/Model/Drawing/Element.d \
 ./src/Model/Drawing/Line.d \
+./src/Model/Drawing/Midpoint.d \
 ./src/Model/Drawing/Point.d \
 ./src/Model/Drawing/Union.d \
 ./src/Model/Drawing/UpdateElement.d 

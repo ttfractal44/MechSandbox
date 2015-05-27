@@ -530,7 +530,7 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  ../src/Client/../misc/../misc/strings.h ../src/Client/libraries.h \
  ../src/Client/GraphicsAttachedToolWindow.h ../src/Client/ToolWindow.h \
- ../src/Client/../misc/UCallback.h
+ ../src/Client/../misc/UCallback.h ../src/Client/../misc/utils.h
 
 ../src/Client/GraphicsWindow.h:
 
@@ -1677,3 +1677,5 @@ src/Client/GraphicsWindow.d: ../src/Client/GraphicsWindow.cpp \
 ../src/Client/ToolWindow.h:
 
 ../src/Client/../misc/UCallback.h:
+
+../src/Client/../misc/utils.h:
