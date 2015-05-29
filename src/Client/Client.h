@@ -27,6 +27,7 @@ public:
 	void initializeGraphics();
 	void destroyGraphics();
 	void main();
+	void quit();
 	GraphicsWindow* newGraphicsWindow(std::string newWindowTitle, int newWindowWidth, int newWindowHeight);
 	ToolWindow* newToolWindow(std::string newWindowTitle);
 private:

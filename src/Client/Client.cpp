@@ -161,6 +161,8 @@ void Client::main() {
 			GraphicsWindow* graphicsWindow = sdlWindowIDMap[event.window.windowID];
 			if (graphicsWindow) {
 				graphicsWindow->handleEvent(event);
+			} else if (event.type==SDL_QUIT) {
+				quit();
 			} else {
 				printf("Event received for unregistered SDL window!\n");  // Or global event... Perhaps check if windowID is NULL?
 			}
@@ -172,6 +174,10 @@ void Client::main() {
 
 	}
 
+}
+
+void Client::quit() {
+	runmain=false;
 }
 
 } /* namespace Client */
