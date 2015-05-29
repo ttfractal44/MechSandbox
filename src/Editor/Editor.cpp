@@ -109,6 +109,7 @@ void Editor::createTools() {
 	tools.push_back(newTool("copysequence", "Copy Sequence"));
 	defaultTool = &tools.at(0);
 	currentTool = defaultTool;
+	setTool(currentTool);
 }
 
 bool Editor::requestClose() {
@@ -374,7 +375,7 @@ void Editor::handleGraphicsWindowEvent(SDL_Event* event) {
 			printf("%s\n", currentTool->name.c_str());
 			if (!nowdrawing) {
 				if (currentTool->name=="select") {
-					if (selectElement->getClassName()=="Point") {
+					if (selectElement && selectElement->getClassName()=="Point") {
 						Model::Drawing::Point* point = (Model::Drawing::Point*)selectElement;
 						if (Vec2Distance(point->pos,pos)<snapRadius) {
 							printf("Point %p clicked\n",point);
