@@ -551,8 +551,10 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
  ../src/Editor/../Model/Drawing/Curve.h \
  ../src/Editor/../Model/Drawing/Point.h \
  ../src/Editor/../Model/Drawing/Circle.h \
+ ../src/Editor/../Model/Drawing/../../misc/mathutil.h \
  ../src/Editor/../Model/Drawing/Union.h \
- ../src/Editor/../Model/Drawing/CopySequence.h ../src/Editor/mathutil.h
+ ../src/Editor/../Model/Drawing/CopySequence.h \
+ ../src/Editor/../misc/mathutil.h
 
 ../src/Editor/Editor.h:
 
@@ -1740,8 +1742,10 @@ src/Editor/Editor.d: ../src/Editor/Editor.cpp ../src/Editor/Editor.h \
 
 ../src/Editor/../Model/Drawing/Circle.h:
 
+../src/Editor/../Model/Drawing/../../misc/mathutil.h:
+
 ../src/Editor/../Model/Drawing/Union.h:
 
 ../src/Editor/../Model/Drawing/CopySequence.h:
 
-../src/Editor/mathutil.h:
+../src/Editor/../misc/mathutil.h:

@@ -529,7 +529,8 @@ src/Model/Drawing/Circle.d: ../src/Model/Drawing/Circle.cpp \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
  ../src/Model/Drawing/../../misc/../misc/strings.h \
- ../src/Model/Drawing/UpdateElement.h ../src/Model/Drawing/Drawing.h
+ ../src/Model/Drawing/UpdateElement.h ../src/Model/Drawing/Drawing.h \
+ ../src/Model/Drawing/Point.h ../src/Model/Drawing/../../misc/mathutil.h
 
 ../src/Model/Drawing/Circle.h:
 
@@ -1672,3 +1673,7 @@ src/Model/Drawing/Circle.d: ../src/Model/Drawing/Circle.cpp \
 ../src/Model/Drawing/UpdateElement.h:
 
 ../src/Model/Drawing/Drawing.h:
+
+../src/Model/Drawing/Point.h:
+
+../src/Model/Drawing/../../misc/mathutil.h:

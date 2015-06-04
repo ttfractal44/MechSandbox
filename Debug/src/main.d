@@ -531,14 +531,14 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
  ../src/Model/Drawing/UpdateElement.h ../src/Model/Drawing/Drawing.h \
  ../src/Model/Drawing/Point.h ../src/Model/Drawing/Line.h \
  ../src/Model/Drawing/Curve.h ../src/Model/Drawing/Point.h \
- ../src/Model/Drawing/Circle.h ../src/Model/Drawing/Union.h \
- ../src/Model/Drawing/CopySequence.h ../src/Client/Client.h \
- ../src/Client/../misc/config.h ../src/Client/../misc/utils.h \
- ../src/Client/libraries.h ../src/Client/GraphicsWindow.h \
- ../src/Client/Client.h ../src/Client/GraphicsAttachedToolWindow.h \
- ../src/Client/ToolWindow.h ../src/Client/../misc/UCallback.h \
- ../src/Client/../misc/utils.h ../src/Editor/Editor.h \
- ../src/Editor/../Model/Drawing/Drawing.h \
+ ../src/Model/Drawing/Circle.h ../src/Model/Drawing/../../misc/mathutil.h \
+ ../src/Model/Drawing/Union.h ../src/Model/Drawing/CopySequence.h \
+ ../src/Client/Client.h ../src/Client/../misc/config.h \
+ ../src/Client/../misc/utils.h ../src/Client/libraries.h \
+ ../src/Client/GraphicsWindow.h ../src/Client/Client.h \
+ ../src/Client/GraphicsAttachedToolWindow.h ../src/Client/ToolWindow.h \
+ ../src/Client/../misc/UCallback.h ../src/Client/../misc/utils.h \
+ ../src/Editor/Editor.h ../src/Editor/../Model/Drawing/Drawing.h \
  ../src/Editor/../Client/GraphicsWindow.h \
  ../src/Editor/../Client/Client.h ../src/Editor/../Client/ToolWindow.h \
  ../src/Editor/../Client/GraphicsAttachedToolWindow.h \
@@ -548,8 +548,8 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
  ../src/Editor/../Model/Drawing/Line.h \
  ../src/Editor/../Model/Drawing/Circle.h \
  ../src/Editor/../Model/Drawing/Union.h \
- ../src/Editor/../Model/Drawing/CopySequence.h ../src/Editor/mathutil.h \
- ../src/Editor/mathutil.h
+ ../src/Editor/../Model/Drawing/CopySequence.h \
+ ../src/Editor/../misc/mathutil.h ../src/misc/mathutil.h ../src/demo.h
 
 ../src/Model/Drawing/Drawing.h:
 
@@ -1701,6 +1701,8 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
 
 ../src/Model/Drawing/Circle.h:
 
+../src/Model/Drawing/../../misc/mathutil.h:
+
 ../src/Model/Drawing/Union.h:
 
 ../src/Model/Drawing/CopySequence.h:
@@ -1757,6 +1759,8 @@ src/main.d: ../src/main.cpp ../src/Model/Drawing/Drawing.h \
 
 ../src/Editor/../Model/Drawing/CopySequence.h:
 
-../src/Editor/mathutil.h:
+../src/Editor/../misc/mathutil.h:
 
-../src/Editor/mathutil.h:
+../src/misc/mathutil.h:
+
+../src/demo.h:
